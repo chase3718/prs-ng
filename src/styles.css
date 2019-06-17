@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+thead th {
+    text-shadow: 2px 2px #000000;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,8 @@
+<nav class="bg-dark">
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item bg-dark" *ngFor="let mi of menuItems" title="{{mi.tooltip}}">
+      <a routerLink="{{mi.href}}" routerLinkActive="text-color-yellow" class="text-white"
+        style="text-shadow: 2px 2px #000000; text-decoration: none;">{{mi.display}}</a>
+    </li>
+  </ul>
+</nav>

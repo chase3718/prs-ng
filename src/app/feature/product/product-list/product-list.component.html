@@ -1,0 +1,32 @@
+<app-menu></app-menu>
+<div class="component-content">
+  <div class="lefthalf">
+    <span class="component-title">[{{title}}]</span>
+    <span>
+      <a><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
+    </span>
+  </div>
+</div>
+<p *ngIf="!products">Loading ...</p>
+<table *ngIf="products" class="table table-sm">
+  <thead class="thead-dark">
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">VENDOR</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PART NUMBER</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">NAME</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PRICE</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">UNIT</a></th>
+    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHOTO PATH</a></th>
+  </thead>
+  <tbody class="table-hover">
+    <tr *ngFor="let product of products">
+      <td>{{product.id}}</td>
+      <td>{{product.vendor}}</td>
+      <td>{{product.partNumber}}</td>
+      <td>{{product.name}}</td>
+      <td>${{product.price}}</td>
+      <td>{{product.unit}}</td>
+      <td>{{product.photoPath}}</td>
+    </tr>
+  </tbody>
+</table>
