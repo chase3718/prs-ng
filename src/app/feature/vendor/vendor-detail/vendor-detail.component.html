@@ -1,0 +1,76 @@
+<app-menu></app-menu>
+<div class='component-content'>
+
+  <div class='lefthalf'>
+    <span class='component-title'>{{title}}</span>
+    <span><a routerLink='/vendor/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
+          title='Add New'></a></span>
+  </div>
+
+  <table class="table table-sm" *ngIf='vendor'>
+    <tr>
+      <td>Id</td>
+      <td>{{ vendor.id}}</td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td>{{ vendor.code}}</td>
+    </tr>
+    <tr>
+      <td>Vendor Name</td>
+      <td>{{ vendor.name }}</td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td>{{ vendor.address}}, {{vendor.city}} {{vendor.state}}, {{vendor.zip}}</td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td>{{ vendor.phoneNumber }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ vendor.email }}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <a routerLink='/vendor/edit/{{vendor.id}}' class='btn btn-primary' title='Edit'>Edit</a>&nbsp;
+        <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
+      </td>
+    </tr>
+  </table>
+
+  <div class='lefthalf'>
+    <span class='component-title'>Products</span>
+  </div>
+  <p *ngIf="!products">Loading ...</p>
+  <table *ngIf="products" class="table table-sm">
+    <thead class="thead-dark">
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">VENDOR</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PART NUMBER</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">NAME</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PRICE</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">UNIT</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHOTO PATH</a></th>
+      <th class="table-secondary btn-link"><a class="btn font-weight-bold">ACTION</a></th>
+    </thead>
+    <tbody class="table-hover table-bordered">
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.vendor.name}}</td>
+        <td>{{product.partNumber}}</td>
+        <td>{{product.name}}</td>
+        <td>${{product.price}}</td>
+        <td>{{product.unit}}</td>
+        <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
+        <td class="actions">
+          <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
+              src="../../../../assets/details.png"></a>&nbsp;
+          <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
+              src="../../../../assets/pencil-icon.png"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

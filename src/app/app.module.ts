@@ -16,6 +16,12 @@ import { PrliListComponent } from './feature/prli/prli-list/prli-list.component'
 import { UserCreateComponent } from './feature/user/user-create/user-create.component';
 import { UserDetailComponent } from './feature/user/user-detail/user-detail.component';
 import { UserEditComponent } from './feature/user/user-edit/user-edit.component';
+import { VendorCreateComponent } from './feature/vendor/vendor-create/vendor-create.component';
+import { VendorDetailComponent } from './feature/vendor/vendor-detail/vendor-detail.component';
+import { VendorEditComponent } from './feature/vendor/vendor-edit/vendor-edit.component';
+import { ProductCreateComponent } from './feature/product/product-create/product-create.component';
+import { ProductDetailComponent } from './feature/product/product-detail/product-detail.component';
+import { ProductEditComponent } from './feature/product/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { UserEditComponent } from './feature/user/user-edit/user-edit.component'
     PrliListComponent,
     UserCreateComponent,
     UserDetailComponent,
-    UserEditComponent
+    UserEditComponent,
+    VendorCreateComponent,
+    VendorDetailComponent,
+    VendorEditComponent,
+    ProductCreateComponent,
+    ProductDetailComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,

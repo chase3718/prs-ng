@@ -1,0 +1,54 @@
+<app-menu></app-menu>
+<div class='component-content'>
+  <div>
+    <span class='component-title'>{{title}}]y</span>
+  </div>
+  <p *ngIf='!product'>Loading...</p>
+
+  <div *ngIf='product'>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productVendor">Vendor:</label>
+      <select id="vendor" class="form-control col-sm-6" [(ngModel)]="product.vendor">
+        <option disabled selected>Please select a vendor</option>
+        <option *ngFor="let vendor of vendors" [value]="vendor">{{vendor.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productPartNumber">Part Number:</label>
+      <input [(ngModel)]='product.partNumber' name='PartNumber' type="text" class="form-control col-sm-6"
+        id="productPartNumber" aria-describedby="pnumberHelp" placeholder="PartNumber" maxLength="50">
+      <small id="pnumberHelp" class="form-text text-muted col-sm-2">product part number</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productName">Product Name:</label>
+      <input [(ngModel)]='product.name' name='Name' type="text" class="form-control col-sm-6" id="productName"
+        aria-describedby="nameHelp" placeholder="Name" maxLength="150">
+      <small id="nameHelp" class="form-text text-muted col-sm-2">product name</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productPrice">Product Price:</label>
+      <div class="input-icon col-sm-6">
+        <input [(ngModel)]='product.price' name='Price' type="number" class="form-control" id="productPrice"
+          aria-describedby="priceHelp" placeholder="Price" min="0.01">
+        <i style="color: black">$</i>
+      </div>
+      <small id="priceHelp" class="form-text text-muted col-sm-2">product price</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productUnit">Unit:</label>
+      <input [(ngModel)]='product.unit' name='Unit' type="text" class="form-control col-sm-6" id="productUnit"
+        aria-describedby="unitHelp" placeholder="Unit" maxLength="255">
+      <small id="unitHelp" class="form-text text-muted col-sm-2">product unit</small>
+    </div>
+    <!-- <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="productPhotoPath">Product Photo:</label>
+      <input [(ngModel)]='product.photoPath' name='PhotoPath' type="file" id="productPhoto"
+        aria-describedby="photoHelp">
+      <small id="photoHelp" class="form-text text-muted col-sm-2">product photo</small>
+    </div> -->
+    <div class='form-group'>
+      <button (click)='create()' class='btn btn-primary'>Create</button>
+    </div>
+  </div>
+</div>

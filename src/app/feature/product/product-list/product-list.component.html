@@ -1,24 +1,38 @@
+<script>
+  $(document).ready(function () {
+    $('#dtVerticalScrollExample').DataTable({
+      "scrollY": "200px",
+      "scrollCollapse": true,
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>
 <app-menu></app-menu>
 <div class="component-content">
   <div class="lefthalf">
-    <span class="component-title"><b>{{title}}</b></span>
+    <span class="component-title">{{title}}&nbsp;</span>
     <span>
-      <a><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
+      <a routerLink='/product/create'><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
+          title='Add New'></a>
     </span>
   </div>
 </div>
 <p *ngIf="!products">Loading ...</p>
-<table *ngIf="products" class="table table-sm">
-  <thead class="thead-dark">
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">VENDOR</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PART NUMBER</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">NAME</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PRICE</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">UNIT</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHOTO PATH</a></th>
+
+
+<table id="dtVerticalScrollExample" class="table table-dark table-bordered table-sm" cellspacing="0"
+  width="100%">
+  <thead>
+    <th class="th-sm"><a class="btn font-weight-bold">ID</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">VENDOR</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">PART NUMBER</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">NAME</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">PRICE</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">UNIT</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">PHOTO PATH</a></th>
+    <th class="th-sm"><a class="btn font-weight-bold">ACTION</a></th>
   </thead>
-  <tbody class="table-hover table-bordered">
+  <tbody>
     <tr *ngFor="let product of products">
       <td>{{product.id}}</td>
       <td>{{product.vendor.name}}</td>
@@ -27,6 +41,12 @@
       <td>${{product.price}}</td>
       <td>{{product.unit}}</td>
       <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
+      <td class="actions">
+        <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
+            src="../../../../assets/details.png"></a>&nbsp;
+        <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
+            src="../../../../assets/pencil-icon.png"></a>
+      </td>
     </tr>
   </tbody>
 </table>
