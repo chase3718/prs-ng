@@ -10,6 +10,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "paths": {
+      "@model/*": ["app/model/*"],
+      "@svc/*": ["app/service/"]
+    },
     "target": "es2015",
     "typeRoots": [
       "node_modules/@types"

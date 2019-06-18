@@ -15,4 +15,6 @@ export class VendorService {
   list(): Observable<JsonResponse> {
     return this.http.get(this.url) as Observable<JsonResponse>;
   }
+
+  
 }

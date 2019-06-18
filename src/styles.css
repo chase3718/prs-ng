@@ -1,6 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: white;
+}
+
+span {
+    font-size: 15pt;
+}
+
+table {
+    max-width: 99%;
+    margin: auto;
+}
+
 thead th {
     text-shadow: 2px 2px #000000;
+    text-align: left;
 }
 
 a:hover {

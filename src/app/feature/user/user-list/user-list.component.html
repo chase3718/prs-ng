@@ -3,7 +3,7 @@
   <div class="lefthalf">
     <span class="component-title">[{{title}}]</span>
     <span>
-      <a><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
+      <a routerLink="/user/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
     </span>
   </div>
 </div>
@@ -20,7 +20,7 @@
     <th class="table-secondary">PRIVILEGE</th>
     <th class="table-secondary">ACTION</th>
   </thead>
-  <tbody class="table-hover">
+  <tbody class="table-hover table-bordered">
     <tr *ngFor="let user of users">
       <td>{{user.id}}</td>
       <td>{{user.userName}}</td>
@@ -30,7 +30,9 @@
       <td>{{user.phoneNumber}}</td>
       <td>{{user.email}}</td>
       <td>{{user.reviewer?"Rvw":""}} {{user.admin?"Admin":""}}</td>
-      <td><a><img width=20 height=20 src="../../../../assets/details.png"></a></td>
+      <td class="actions">
+        <a routerLink='/user/detail/{{user.id}}'><img width=20 height=20 src="../../../../assets/details.png"></a>&nbsp;
+        <a routerLink='/user/edit/{{user.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a></td>
     </tr>
   </tbody>
 </table>

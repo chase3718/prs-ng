@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <div class="component-content">
   <div class="lefthalf">
-    <span class="component-title">[{{title}}]</span>
+    <span class="component-title"><b>{{title}}</b></span>
     <span>
       <a><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
     </span>
@@ -18,15 +18,15 @@
     <th class="table-secondary btn-link"><a class="btn font-weight-bold">UNIT</a></th>
     <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHOTO PATH</a></th>
   </thead>
-  <tbody class="table-hover">
+  <tbody class="table-hover table-bordered">
     <tr *ngFor="let product of products">
       <td>{{product.id}}</td>
-      <td>{{product.vendor}}</td>
+      <td>{{product.vendor.name}}</td>
       <td>{{product.partNumber}}</td>
       <td>{{product.name}}</td>
       <td>${{product.price}}</td>
       <td>{{product.unit}}</td>
-      <td>{{product.photoPath}}</td>
+      <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
     </tr>
   </tbody>
 </table>
