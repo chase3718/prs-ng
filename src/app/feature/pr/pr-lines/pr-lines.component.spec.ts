@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrliListComponent } from './prli-list.component';
+import { PrLinesComponent } from './pr-lines.component';
 
-describe('PrliListComponent', () => {
-  let component: PrliListComponent;
-  let fixture: ComponentFixture<PrliListComponent>;
+describe('PrLinesComponent', () => {
+  let component: PrLinesComponent;
+  let fixture: ComponentFixture<PrLinesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrliListComponent ]
+      declarations: [ PrLinesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrliListComponent);
+    fixture = TestBed.createComponent(PrLinesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

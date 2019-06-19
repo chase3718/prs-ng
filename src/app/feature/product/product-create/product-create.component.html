@@ -10,7 +10,7 @@
       <label class='col-form-label col-sm-2' for="productVendor">Vendor:</label>
       <select id="vendor" class="form-control col-sm-6" [(ngModel)]="product.vendor">
         <option disabled selected>Please select a vendor</option>
-        <option *ngFor="let vendor of vendors" [value]="vendor">{{vendor.name}}
+        <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}
         </option>
       </select>
     </div>

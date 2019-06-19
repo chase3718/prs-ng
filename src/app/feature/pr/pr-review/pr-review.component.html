@@ -28,23 +28,22 @@
   <div class="tbl-content">
     <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor="let pr of prs">
-          <td>{{pr.user.userName}}</td>
-          <td>{{pr.description}}</td>
-          <td>{{pr.justification}}</td>
-          <td>{{pr.dateNeeded}}</td>
-          <td>{{pr.deliveryMode}}</td>
-          <td>{{pr.status}}</td>
-          <td>${{pr.total}}</td>
-          <td>{{pr.submittedDate}}</td>
-          <td class="actions" colspan="1">
-            <a routerLink='/pr/detail/{{pr.id}}'><img width=20 height=20 src="../../../../assets/details.png"></a>&nbsp;
-            <a routerLink='/pr/edit/{{pr.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
-            <a routerLink='/pr/lines/{{pr.id}}'><img width=20 height=20 src="../../../../assets/lines.png"></a>
-          </td>
-        </tr>
+        <tr *ngFor="let pr of review()">
+            <td>{{pr.user.userName}}</td>
+            <td>{{pr.description}}</td>
+            <td>{{pr.justification}}</td>
+            <td>{{pr.dateNeeded}}</td>
+            <td>{{pr.deliveryMode}}</td>
+            <td>{{pr.status}}</td>
+            <td>${{pr.total}}</td>
+            <td>{{pr.submittedDate}}</td>
+            <td class="actions" colspan="1">
+              <a routerLink='/pr/approve/{{pr.id}}'><img width=20 height=20
+                  src="../../../../assets/review.png"></a>
+            </td>
+          </tr>
       </tbody>
     </table>
   </div>
-  
+
 </div>

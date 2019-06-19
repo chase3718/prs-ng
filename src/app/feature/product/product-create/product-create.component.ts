@@ -37,7 +37,8 @@ export class ProductCreateComponent implements OnInit {
   }
 
   create() {
-    this.product.photoPath = '/images/' + this.product.photoPath;
+    // this.product.photoPath = '/images/' + this.product.photoPath;
+    console.log(this.product, JSON.stringify(this.product.vendor));
     this.productSvc.create(this.product).subscribe(
       jresp => {
         this.jr = jresp;

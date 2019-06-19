@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+<div class="component-content">
+  <div class="lefthalf">
+    <span class="component-title">{{title}}</span>
+  </div>
+</div>
+<p *ngIf='!pr'>Loading...</p>
+<div *ngIf='pr'>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="pr">Description:</label>
+    <input [(ngModel)]='pr.description' name='Description' type="text" class="form-control col-sm-6" id="prDesc"
+      aria-describedby="descHelp" placeholder="Description" maxlength="100">
+    <small id="descHelp" class="form-text text-muted col-sm-2">Description of purchase request</small>
+  </div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="pr">Justification:</label>
+    <input [(ngModel)]='pr.justification' name='Justification' type="text" class="form-control col-sm-6" id="prJust"
+      aria-describedby="justHelp" placeholder="Justification" maxlength="255">
+    <small id="justHelp" class="form-text text-muted col-sm-2">What do you need this for</small>
+  </div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="pr">Date Needed:</label>
+    <input [(ngModel)]='pr.dateNeeded' name='DateNeeded' type="date" class="form-control col-sm-6" id="prDateNeeded"
+      aria-describedby="neededHelp">
+    <small id="neededHelp" class="form-text text-muted col-sm-2">When do you need it by</small>
+  </div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="pr">Delivery Mode:</label>
+    <input [(ngModel)]='pr.deliveryMode' name='DeliveryMode' type="text" class="form-control col-sm-6"
+      id="prDeliveryMode" aria-describedby="modeHelp">
+    <small id="modeHelp" class="form-text text-muted col-sm-2">How will you recieve it</small>
+  </div>
+  <div class='form-group'>
+    <button (click)='edit()' class='btn btn-primary'>Update</button>
+  </div>
+</div>

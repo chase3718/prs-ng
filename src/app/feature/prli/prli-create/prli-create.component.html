@@ -1,0 +1,26 @@
+<app-menu></app-menu>
+<div class="component-content">
+  <div class="lefthalf">
+    <span class="component-title">{{title}}</span>
+  </div>
+</div>
+<p *ngIf='!prli'>Loading...</p>
+<div *ngIf='prli'>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="prliProduct">Product:</label>
+    <select id="product" class="form-control col-sm-6" [(ngModel)]="prli.product">
+      <option disabled selected>Please select a product</option>
+      <option *ngFor="let product of products" [ngValue]="product">{{product.name}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="pr">Quantity:</label>
+    <input [(ngModel)]='prli.quantity' name='Quantity' type="number" class="form-control col-sm-6" id="prliDesc"
+      aria-quanribedby="quanHelp" placeholder="Quantity" min=1>
+    <small id="quanHelp" class="form-text text-muted col-sm-2">Quantity of Products</small>
+  </div>
+  <div class='form-group'>
+    <button (click)='create()' class='btn btn-primary'>Add</button>
+  </div>
+</div>

@@ -44,33 +44,36 @@
     <span class='component-title'>Products</span>
   </div>
   <p *ngIf="!products">Loading ...</p>
-  <table *ngIf="products" class="table table-sm">
-    <thead class="thead-dark">
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">VENDOR</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PART NUMBER</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">NAME</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PRICE</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">UNIT</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHOTO PATH</a></th>
-      <th class="table-secondary btn-link"><a class="btn font-weight-bold">ACTION</a></th>
-    </thead>
-    <tbody class="table-hover table-bordered">
-      <tr *ngFor="let product of products">
-        <td>{{product.id}}</td>
-        <td>{{product.vendor.name}}</td>
-        <td>{{product.partNumber}}</td>
-        <td>{{product.name}}</td>
-        <td>${{product.price}}</td>
-        <td>{{product.unit}}</td>
-        <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
-        <td class="actions">
-          <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
-              src="../../../../assets/details.png"></a>&nbsp;
-          <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
-              src="../../../../assets/pencil-icon.png"></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="products">
+    <div class="tbl-header" style="overflow: auto">
+      <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <th><a class="btn font-weight-bold" (click)="sortBy('partNumber')">PART</a></th>
+          <th><a class="btn font-weight-bold" (click)="sortBy('name')">NAME</a></th>
+          <th><a class="btn font-weight-bold" (click)="sortBy('price')">PRICE</a></th>
+          <th><a class="btn font-weight-bold" (click)="sortBy('unit')">UNIT</a></th>
+          <th><a class="btn font-weight-bold">PHOTO</a></th>
+          <th><a class="btn font-weight-bold">ACTION</a></th>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          <tr *ngFor='let product of products | sort:sortCriteria:sortOrder'>
+            <td>{{product.partNumber}}</td>
+            <td>{{product.name}}</td>
+            <td>${{product.price}}</td>
+            <td>{{product.unit}}</td>
+            <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
+            <td class="actions">
+              <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
+                  src="../../../../assets/details.png"></a>
+              <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
+                  src="../../../../assets/pencil-icon.png"></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

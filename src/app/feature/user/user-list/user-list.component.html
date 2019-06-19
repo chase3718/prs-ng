@@ -3,36 +3,43 @@
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
     <span>
-      <a routerLink="/user/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png' title='Add New'></a>
+      <a routerLink="/user/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
+          title='Add New'></a>
     </span>
   </div>
 </div>
 <p *ngIf="!users">Loading ...</p>
-<table *ngIf="users" class="table table-sm">
-  <thead class="thead-dark">
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">USERNAME</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PASSWORD</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">FIRST NAME</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">LAST NAME</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHONE NUMBER</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">EMAIL</a></th>
-    <th class="table-secondary">PRIVILEGE</th>
-    <th class="table-secondary">ACTION</th>
-  </thead>
-  <tbody class="table-hover table-bordered">
-    <tr *ngFor="let user of users">
-      <td>{{user.id}}</td>
-      <td>{{user.userName}}</td>
-      <td>{{user.password}}</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.phoneNumber}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.reviewer?"Rvw":""}} {{user.admin?"Admin":""}}</td>
-      <td class="actions">
-        <a routerLink='/user/detail/{{user.id}}'><img width=20 height=20 src="../../../../assets/details.png"></a>&nbsp;
-        <a routerLink='/user/edit/{{user.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="users">
+  <div class="tbl-header" style="overflow: auto">
+    <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <th><a class="btn font-weight-bold">USERNAME</a></th>
+        <th><a class="btn font-weight-bold">FIRST</a></th>
+        <th><a class="btn font-weight-bold">LAST</a></th>
+        <th><a class="btn font-weight-bold">PHONE</a></th>
+        <th><a class="btn font-weight-bold">EMAIL</a></th>
+        <th><a class="btn font-weight-bold disabled">PRIVILEGE</a></th>
+        <th><a class="btn font-weight-bold disabled">ACTION</a></th>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content" cellpadding="0" cellspacing="0" border="0">
+    <table class="table-active table-bordered">
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.userName}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.reviewer?"Rvw":""}} {{user.admin?"Admin":""}}</td>
+          <td class="actions">
+            <a routerLink='/user/detail/{{user.id}}'><img width=20 height=20
+                src="../../../../assets/details.png"></a>&nbsp;
+            <a routerLink='/user/edit/{{user.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -23,6 +23,10 @@ a:hover {
     cursor: pointer;
 }
 
+a:hover .disabled {
+    cursor: auto;
+}
+
 a {
     text-decoration: none;
 }
@@ -57,16 +61,52 @@ a {
     text-align: right;
 }
 
-.my-custom-scrollbar {
-    position: relative;
-    height: 500px;
-    overflow: auto;
+table {
+    width: 100%;
+    table-layout: fixed;
 }
 
-.table-wrapper-scroll-y {
-    display: block;
+.tbl-header {
+    width: 1300px;
+    margin: 0;
+    padding: 0;
 }
 
-table.dataTable thead .sorting:after, table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_desc_disabled:after, table.dataTable thead .sorting_desc_disabled:before {
-    bottom: .5em;
+.tbl-content {
+    width: 1300px;
+    height: 420px;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0;
+}
+
+th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    margin: 0;
+    border-width: 0;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 2px;
+    margin: 0;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+*, ::after, ::before {
+    box-sizing: content-box;
 }

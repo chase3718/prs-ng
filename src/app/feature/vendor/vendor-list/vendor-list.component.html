@@ -9,30 +9,40 @@
   </div>
 </div>
 <p *ngIf="!vendors">Loading ...</p>
-<table *ngIf="vendors" class="table table-sm">
-  <thead class="thead-dark">
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ID</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">CODE</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">NAME</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ADDRESS</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PHONE NUMBER</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">EMAIL</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">PREAPPROVED</a></th>
-    <th class="table-secondary btn-link"><a class="btn font-weight-bold">ACTION</a></th>
-  </thead>
-  <tbody class="table-hover table-bordered">
-    <tr *ngFor="let vendor of vendors">
-      <td>{{vendor.id}}</td>
-      <td>{{vendor.code}}</td>
-      <td>{{vendor.name}}</td>
-      <td>{{vendor.address}}, {{vendor.city}} {{vendor.state}}, {{vendor.zip}}</td>
-      <td>{{vendor.phoneNumber}}</td>
-      <td>{{vendor.email}}</td>
-      <td>{{vendor.preApproved?"Yes":"No"}}</td>
-      <td class="actions">
-        <a routerLink='/vendor/detail/{{vendor.id}}'><img width=20 height=20 src="../../../../assets/details.png"></a>&nbsp;
-        <a routerLink='/vendor/edit/{{vendor.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="vendors">
+  <div class="tbl-header" style="overflow: auto">
+    <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <th><a class="btn font-weight-bold">ID</a></th>
+        <th><a class="btn font-weight-bold">CODE</a></th>
+        <th><a class="btn font-weight-bold">NAME</a></th>
+        <th><a class="btn font-weight-bold">ADDRESS</a></th>
+        <th><a class="btn font-weight-bold">PHONE</a></th>
+        <th><a class="btn font-weight-bold">EMAIL</a></th>
+        <th><a class="btn font-weight-bold">PREAPPROVED</a></th>
+        <th><a class="btn font-weight-bold">ACTION</a></th>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr *ngFor="let vendor of vendors">
+          <td>{{vendor.id}}</td>
+          <td>{{vendor.code}}</td>
+          <td>{{vendor.name}}</td>
+          <td>{{vendor.address}}, {{vendor.city}} {{vendor.state}}, {{vendor.zip}}</td>
+          <td>{{vendor.phoneNumber}}</td>
+          <td>{{vendor.email}}</td>
+          <td>{{vendor.preApproved?"Yes":"No"}}</td>
+          <td class="actions">
+            <a routerLink='/vendor/detail/{{vendor.id}}'><img width=20 height=20
+                src="../../../../assets/details.png"></a>&nbsp;
+            <a routerLink='/vendor/edit/{{vendor.id}}'><img width=20 height=20
+                src="../../../../assets/pencil-icon.png"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

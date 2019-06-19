@@ -12,7 +12,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  
+  <script>
+    $(window).on("load resize ", function () {
+      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+      $('.tbl-header').css({ 'padding-right': scrollWidth });
+    }).resize();
+
+    
+  </script>
 </head>
 
 <body>

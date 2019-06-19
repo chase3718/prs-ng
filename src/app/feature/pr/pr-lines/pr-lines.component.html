@@ -1,0 +1,98 @@
+<app-menu></app-menu>
+<div class='component-content'>
+
+  <div class='lefthalf'>
+    <span class='component-title'>Purchase Request #{{pr.id}}</span>
+  </div>
+
+  <p *ngIf="!pr">Loading ...</p>
+  <div *ngIf="pr">
+
+    <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+      <thead class="thead-dark">
+        <th><a class="btn font-weight-bold">USER</a></th>
+        <th><a class="btn font-weight-bold">NEEDED</a></th>
+        <th><a class="btn font-weight-bold">DELIVERY</a></th>
+        <th><a class="btn font-weight-bold">STATUS</a></th>
+        <th><a class="btn font-weight-bold">TOTAL</a></th>
+        <th><a class="btn font-weight-bold">SUBMITTED</a></th>
+      </thead>
+
+      <tbody>
+        <tr class="table-bordered table-active tbody-active">
+          <td>{{pr.user.userName}}</td>
+          <td>{{pr.dateNeeded}}</td>
+          <td>{{pr.deliveryMode}}</td>
+          <td>{{pr.status}}</td>
+          <td>${{pr.total}}</td>
+          <td>{{pr.submittedDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="component-content">
+    <div class="lefthalf">
+      <span class="component-title">Line Items&nbsp;</span>
+      <span>
+        <a routerLink="/prli/create/{{pr.id}}"><img id='createnew' width='20' height='20'
+            src='../../../../assets/add-icon.png' title='Add New'></a>
+      </span>
+    </div>
+  </div>
+  <p *ngIf="!prlis">Loading ...</p>
+
+  <div *ngIf="prlis">
+    <div *ngIf="prlis.length > 0">
+      <div class="tbl-header" style="overflow: auto">
+        <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <th><a class="btn font-weight-bold" (click)="sortBy('partNumber')">PRODUCT</a></th>
+            <th><a class="btn font-weight-bold" (click)="sortBy('name')">QUANTITY</a></th>
+            <th><a class="btn font-weight-bold" (click)="sortBy('price')">TOTAL</a></th>
+            <th><a class="btn font-weight-bold">ACTION</a></th>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+
+
+            <tr *ngFor='let prli of prlis | sort:sortCriteria:sortOrder'>
+              <td>{{prli.product.name}}</td>
+              <td>{{prli.quantity}}</td>
+              <td>${{prli.quantity * prli.product.price}}</td>
+              <td class="actions">
+                <a routerLink='/prli/edit/{{prli.id}}'><img width=20 height=20
+                    src="../../../../assets/pencil-icon.png"></a>
+                <a (click)="remove(prli.id)"><img width=20 height=20 src="../../../../assets/delete.jpg"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class='form-group'>
+          <button (click)='submit()' class='btn btn-primary'>Submit for review</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="prlis.length == 0">
+      <div class="tbl-header" style="overflow: auto">
+        <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <th><a class="btn font-weight-bold" (click)="sortBy('partNumber')">PRODUCT</a></th>
+            <th><a class="btn font-weight-bold" (click)="sortBy('name')">QUANTITY</a></th>
+            <th><a class="btn font-weight-bold" (click)="sortBy('price')">TOTAL</a></th>
+            <th><a class="btn font-weight-bold">ACTION</a></th>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
+          <tbody>No line items to display. Please add new line item.</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<app-menu></app-menu>
+<div class='component-content'>
+
+  <div class='lefthalf'>
+    <span class='component-title'>{{title}}</span>
+    <span><a routerLink='/pr/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
+          title='Add New'></a></span>
+  </div>
+
+  <table class="table table-sm" *ngIf='pr'>
+    <tr>
+      <td>Id</td>
+      <td>{{ pr.id}}</td>
+    </tr>
+    <tr>
+      <td>User</td>
+      <td>{{ pr.user.userName }}</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>{{ pr.description }}</td>
+    </tr>
+    <tr>
+      <td>Justification</td>
+      <td>{{ pr.justification }}</td>
+    </tr>
+    <tr>
+      <td>Date needed</td>
+      <td>{{ pr.dateNeeded }}</td>
+    </tr>
+    <tr>
+      <td>Delivery mode</td>
+      <td>{{ pr.deliveryMode }}</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>{{ pr.status }}</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>${{ pr.total }}</td>
+    </tr>
+    <tr>
+      <td>Submitted date</td>
+      <td>{{pr.submittedDate}}</td>
+    </tr>
+    <tr>
+      <td>Reason for rejection</td>
+      <td>{{pr.reasonForRejection}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <a routerLink='/pr/edit/{{pr.id}}' class='btn btn-primary' title='Edit'>Edit</a>&nbsp;
+        <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
+      </td>
+    </tr>
+  </table>
+</div>

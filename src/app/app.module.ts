@@ -12,7 +12,6 @@ import { AboutComponent } from './core/about/about.component';
 import { VendorListComponent } from './feature/vendor/vendor-list/vendor-list.component';
 import { ProductListComponent } from './feature/product/product-list/product-list.component';
 import { PrListComponent } from './feature/pr/pr-list/pr-list.component';
-import { PrliListComponent } from './feature/prli/prli-list/prli-list.component';
 import { UserCreateComponent } from './feature/user/user-create/user-create.component';
 import { UserDetailComponent } from './feature/user/user-detail/user-detail.component';
 import { UserEditComponent } from './feature/user/user-edit/user-edit.component';
@@ -22,6 +21,16 @@ import { VendorEditComponent } from './feature/vendor/vendor-edit/vendor-edit.co
 import { ProductCreateComponent } from './feature/product/product-create/product-create.component';
 import { ProductDetailComponent } from './feature/product/product-detail/product-detail.component';
 import { ProductEditComponent } from './feature/product/product-edit/product-edit.component';
+import { PrCreateComponent } from './feature/pr/pr-create/pr-create.component';
+import { PrDetailComponent } from './feature/pr/pr-detail/pr-detail.component';
+import { PrEditComponent } from './feature/pr/pr-edit/pr-edit.component';
+import { SortPipe } from './pipe/sort.pipe';
+import { UserLoginComponent } from './feature/user/user-login/user-login.component';
+import { PrLinesComponent } from './feature/pr/pr-lines/pr-lines.component';
+import { PrliCreateComponent } from './feature/prli/prli-create/prli-create.component';
+import { PrliEditComponent } from './feature/prli/prli-edit/prli-edit.component';
+import { PrReviewComponent } from './feature/pr/pr-review/pr-review.component';
+import { PrApproveComponent } from './feature/pr/pr-approve/pr-approve.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +41,6 @@ import { ProductEditComponent } from './feature/product/product-edit/product-edi
     VendorListComponent,
     ProductListComponent,
     PrListComponent,
-    PrliListComponent,
     UserCreateComponent,
     UserDetailComponent,
     UserEditComponent,
@@ -41,7 +49,17 @@ import { ProductEditComponent } from './feature/product/product-edit/product-edi
     VendorEditComponent,
     ProductCreateComponent,
     ProductDetailComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    PrCreateComponent,
+    PrDetailComponent,
+    PrEditComponent,
+    SortPipe,
+    UserLoginComponent,
+    PrLinesComponent,
+    PrliCreateComponent,
+    PrliEditComponent,
+    PrReviewComponent,
+    PrApproveComponent
   ],
   imports: [
     BrowserModule,
