@@ -37,7 +37,6 @@ export class PrCreateComponent implements OnInit {
   }
   
   create() {
-    this.pr.submittedDate = this.pr.dateNeeded;
     this.prSvc.submitNew(this.pr).subscribe(
       jresp => {
         this.jr = jresp;
