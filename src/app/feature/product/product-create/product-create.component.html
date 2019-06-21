@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <div class='component-content'>
   <div>
-    <span class='component-title'>{{title}}]y</span>
+    <span class='component-title'>{{title}}</span>
   </div>
   <p *ngIf='!product'>Loading...</p>
 
@@ -41,14 +41,30 @@
         aria-describedby="unitHelp" placeholder="Unit" maxLength="255">
       <small id="unitHelp" class="form-text text-muted col-sm-2">product unit</small>
     </div>
-    <!-- <div class="form-group row">
-      <label class='col-form-label col-sm-2' for="productPhotoPath">Product Photo:</label>
-      <input [(ngModel)]='product.photoPath' name='PhotoPath' type="file" id="productPhoto"
-        aria-describedby="photoHelp">
-      <small id="photoHelp" class="form-text text-muted col-sm-2">product photo</small>
-    </div> -->
     <div class='form-group'>
       <button (click)='create()' class='btn btn-primary'>Create</button>
     </div>
   </div>
+  <br>
+  <div class="component-title">Or Choose From File</div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="productVendor">Vendor:</label>
+    <select id="vendor" class="form-control col-sm-6" [(ngModel)]="fileVendor">
+      <option disabled selected>Please select a vendor</option>
+      <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="currentFileUpload" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+      attr.aria-valuenow="{{progress.percentage}}" aria-valuemin="0" aria-valuemax="100"
+      [ngStyle]="{width:progress.percentage+'%'}">
+      {{progress.percentage}}%</div>
+  </div>
+
+  <label class="btn btn-default">
+    <input type="file" (change)="onFileSelected($event)">
+  </label>
+
+  <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
 </div>

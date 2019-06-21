@@ -31,6 +31,9 @@ import { PrliCreateComponent } from './feature/prli/prli-create/prli-create.comp
 import { PrliEditComponent } from './feature/prli/prli-edit/prli-edit.component';
 import { PrReviewComponent } from './feature/pr/pr-review/pr-review.component';
 import { PrApproveComponent } from './feature/pr/pr-approve/pr-approve.component';
+import { HomeComponent } from './core/home/home.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { RerouteComponent } from './core/reroute/reroute.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { PrApproveComponent } from './feature/pr/pr-approve/pr-approve.component
     PrliCreateComponent,
     PrliEditComponent,
     PrReviewComponent,
-    PrApproveComponent
+    PrApproveComponent,
+    HomeComponent,
+    FooterComponent,
+    RerouteComponent
   ],
   imports: [
     BrowserModule,

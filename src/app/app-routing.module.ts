@@ -22,9 +22,14 @@ import { PrliCreateComponent } from './feature/prli/prli-create/prli-create.comp
 import { PrliEditComponent } from './feature/prli/prli-edit/prli-edit.component';
 import { PrReviewComponent } from './feature/pr/pr-review/pr-review.component';
 import { PrApproveComponent } from './feature/pr/pr-approve/pr-approve.component';
+import { UserLoginComponent } from './feature/user/user-login/user-login.component';
+import { HomeComponent } from './core/home/home.component';
+import { RerouteComponent } from './core/reroute/reroute.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user/list', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  {path: 'user/login', component: UserLoginComponent},
 
   { path: 'user/list', component: UserListComponent },
   { path: 'user/create', component: UserCreateComponent },
@@ -56,9 +61,11 @@ const routes: Routes = [
   { path: 'prli/create/:id', component: PrliCreateComponent },
   { path: 'prli/edit/:id', component: PrliEditComponent },
 
+  { path: 'reroute/:id', component: RerouteComponent},
+
   { path: 'about', component: AboutComponent },
 
-  { path: '**', component: UserListComponent }
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

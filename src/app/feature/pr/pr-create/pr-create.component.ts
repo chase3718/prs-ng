@@ -5,6 +5,7 @@ import { PurchaseRequestService } from 'src/app/service/purchase-request.service
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user.class';
 import { UserService } from 'src/app/service/user.service';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-pr-create',
@@ -13,29 +14,26 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class PrCreateComponent implements OnInit {
 
-  title: string = 'Pr Create';
+  title: string = 'Purchase Request Create';
   jr: JsonResponse;
   pr: PurchaseRequest = new PurchaseRequest();
-  users: User[];
 
   constructor(private prSvc: PurchaseRequestService,
-              private userSvc: UserService,
-              private router: Router) { }
+    private sysSvc: SystemService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.userSvc.list().subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.users = this.jr.data as User[];
-          console.log(jresp);
-        } else {
-          console.log(jresp.errors);
-        }
-      }
-    );
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
+    console.log('logged in', this.sysSvc.data.user.loggedIn);
+    if (this.sysSvc.data.user.loggedIn) {
+      this.pr.user = this.sysSvc.data.user.instance;
+    } else {
+      console.error('No user logged in');
+    }
   }
-  
+
   create() {
     this.prSvc.submitNew(this.pr).subscribe(
       jresp => {

@@ -3,6 +3,8 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { PurchaseRequest } from 'src/app/model/purchase-request.class';
 import { PurchaseRequestService } from 'src/app/service/purchase-request.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SystemService } from 'src/app/service/system.service';
+import { User } from 'src/app/model/user.class';
 
 @Component({
   selector: 'app-pr-detail',
@@ -14,13 +16,19 @@ export class PrDetailComponent implements OnInit {
   jr: JsonResponse;
   prIdStr: string;
   pr: PurchaseRequest;
-  title: string = 'PurchaseRequest Detail';
+  title: string = 'Purchase Request Detail';
+  authenticatedUser: User;
 
   constructor(private prSvc: PurchaseRequestService,
+    private sysSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn) {
+      this.router.navigate(['user/login']);
+    }
+    this.authenticatedUser = this.sysSvc.data.user.instance;
     this.route.params.subscribe(params => this.prIdStr = params['id']);
     this.prSvc.get(this.prIdStr).subscribe(
       jresp => {
@@ -39,9 +47,14 @@ export class PrDetailComponent implements OnInit {
     this.prSvc.delete(this.pr).subscribe(
       jresp => {
         this.jr = jresp;
-        console.log('gud');
-        this.router.navigate(['/pr/list']);
-        alert('PurchaseRequest Deleted succesfuly');
+        if (this.jr.errors == null) {
+          console.log(this.jr);
+          alert('PurchaseRequest deleted succesfuly');
+          this.router.navigate(['/pr/list']);
+        } else {
+          console.log(this.jr);
+          alert('Failed to delete purchase request');
+        }
       }
     )
   }

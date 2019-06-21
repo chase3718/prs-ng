@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Vendor } from 'src/app/model/vendor.class';
 import { VendorService } from 'src/app/service/vendor.service';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -21,10 +22,14 @@ export class ProductEditComponent implements OnInit {
 
   constructor(private productSvc: ProductService,
               private vendorSvc: VendorService,
+              private sysSvc: SystemService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
     this.route.params.subscribe(params => this.productIdStr = params['id']);
     this.productSvc.get(this.productIdStr).subscribe(
       jresp => {

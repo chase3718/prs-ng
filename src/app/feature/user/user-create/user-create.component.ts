@@ -3,6 +3,7 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { User } from 'src/app/model/user.class';
 import { UserService } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-user-create',
@@ -16,9 +17,13 @@ export class UserCreateComponent implements OnInit {
   user: User = new User();
 
   constructor(private userSvc: UserService,
+              private sysSvc: SystemService,
               private router: Router) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
   }
 
   create() {

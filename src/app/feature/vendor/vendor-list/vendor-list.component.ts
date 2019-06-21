@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { JsonResponse } from 'src/app/model/json-response.class';
 import { Vendor } from 'src/app/model/vendor.class';
 import { VendorService } from 'src/app/service/vendor.service';
+import { User } from 'src/app/model/user.class';
+import { SystemService } from 'src/app/service/system.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-list',
@@ -13,10 +16,18 @@ export class VendorListComponent implements OnInit {
   jr: JsonResponse;
   vendors: Vendor[];
   title: string = 'Vendor List';
-
-  constructor(private vndSvc: VendorService) { }
+  authenticatedUser: User;
+  sortColumn: string = 'name';
+  sortOrder: string = 'asc';
+  constructor(private vndSvc: VendorService,
+              private sysSvc: SystemService,
+              private router: Router) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
+    this.authenticatedUser = this.sysSvc.data.user.instance;
     this.vndSvc.list().subscribe(
       jresp => {
         this.jr = jresp;
@@ -30,5 +41,11 @@ export class VendorListComponent implements OnInit {
     );
   }
 
-
+  sortBy(col: string) {
+    if (this.sortColumn === col) {
+      this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
+      console.log(`sortBy(${col}), order(${this.sortOrder})`);
+    }
+    this.sortColumn = col;
+  }
 }

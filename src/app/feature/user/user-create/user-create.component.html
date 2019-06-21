@@ -6,56 +6,58 @@
 </div>
 <p *ngIf='!user'>Loading...</p>
 <div *ngIf='user'>
+  <form>
 
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="userfirstname">First name:</label>
-    <input [(ngModel)]='user.firstName' name='FirstName' type="text" class="form-control col-sm-6" id="userfirstname"
-      aria-describedby="fnameHelp" placeholder="FirstName" maxlength="20">
-    <small id="fnameHelp" class="form-text text-muted col-sm-2">User's First Name</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="userlastName">Last name:</label>
-    <input [(ngModel)]='user.lastName' name='LastName' type="text" class="form-control col-sm-6" id="userlastname"
-      aria-describedby="lnameHelp" placeholder="LastName" maxlength="20">
-    <small id="lnameHelp" class="form-text text-muted col-sm-2">User's Last Name</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="username">Username:</label>
-    <input [(ngModel)]='user.userName' name='UserName' type="text" class="form-control col-sm-6" id="username"
-      aria-describedby="unameHelp" placeholder="UserName" maxlength="20">
-    <small id="unameHelp" class="form-text text-muted col-sm-2">User's UserName</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="password">Password:</label>
-    <input [(ngModel)]='user.password' name='Password' type="password" class="form-control col-sm-6" id="password"
-      aria-describedby="pwdHelp" placeholder="Password" maxlength="10">
-    <small id="pwdHelp" class="form-text text-muted col-sm-2">User's Password</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="phone">Phone Number:</label>
-    <input [(ngModel)]='user.phoneNumber' name='PhoneNumber' type="text" class="form-control col-sm-6" id="phone"
-      aria-describedby="phoneHelp" placeholder="PhoneNumber" maxlength="12">
-    <small id="phoneHelp" class="form-text text-muted col-sm-2">User's Phone Number</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="email">Email:</label>
-    <input [(ngModel)]='user.email' name='Email' type="text" class="form-control col-sm-6" id="email"
-      aria-describedby="emailHelp" placeholder="Email" maxlength="75">
-    <small id="emailHelp" class="form-text text-muted col-sm-2">User's Email</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="userAdmin">Admin:</label>
-    <input [(ngModel)]='user.admin' name='Admin' type="checkbox" class="form-control col-sm-6" id="userAdmin"
-      aria-describedby="adminHelp" placeholder="Admin">
-    <small id="adminHelp" class="form-text text-muted col-sm-2">Admin Authority</small>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="userReviewer">Reviewer:</label>
-    <input [(ngModel)]='user.reviewer' name='Reviewer' type="checkbox" class="form-control col-sm-6" id="userReviewer"
-      aria-describedby="reviewerHelp" placeholder="Reviewer">
-    <small id="reviewerHelp" class="form-text text-muted col-sm-2">Reviewer Authority</small>
-  </div>
-  <div class='form-group'>
-    <button (click)='create()' class='btn btn-primary'>Create</button>
-  </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="userfirstname">First name:</label>
+      <input [(ngModel)]='user.firstName' name='FirstName' type="text" class="form-control col-sm-6" id="userfirstname"
+        aria-describedby="fnameHelp" placeholder="FirstName" maxlength="20" required>
+      <small id="fnameHelp" class="form-text text-muted col-sm-2">User's First Name</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="userlastName">Last name:</label>
+      <input [(ngModel)]='user.lastName' name='LastName' type="text" class="form-control col-sm-6" id="userlastname"
+        aria-describedby="lnameHelp" placeholder="LastName" maxlength="20" required>
+      <small id="lnameHelp" class="form-text text-muted col-sm-2">User's Last Name</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="username">Username:</label>
+      <input [(ngModel)]='user.userName' name='UserName' type="text" class="form-control col-sm-6" id="username"
+        aria-describedby="unameHelp" placeholder="UserName" maxlength="20" reqiured>
+      <small id="unameHelp" class="form-text text-muted col-sm-2">User's UserName</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="password">Password:</label>
+      <input [(ngModel)]='user.password' name='Password' type="password" class="form-control col-sm-6" id="password"
+        aria-describedby="pwdHelp" placeholder="Password" maxlength="10" required>
+      <small id="pwdHelp" class="form-text text-muted col-sm-2">User's Password</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="phone">Phone Number:</label>
+      <input [(ngModel)]='user.phoneNumber' name='PhoneNumber' type="text" class="form-control col-sm-6" id="phone"
+        aria-describedby="phoneHelp" placeholder="PhoneNumber" maxlength="12" required>
+      <small id="phoneHelp" class="form-text text-muted col-sm-2">User's Phone Number</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="email">Email:</label>
+      <input [(ngModel)]='user.email' name='Email' type="text" class="form-control col-sm-6" id="email"
+        aria-describedby="emailHelp" placeholder="Email" maxlength="75" required>
+      <small id="emailHelp" class="form-text text-muted col-sm-2">User's Email</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="userAdmin">Admin:</label>
+      <input [(ngModel)]='user.admin' name='Admin' type="checkbox" class="form-control col-sm-6" id="userAdmin"
+        aria-describedby="adminHelp" placeholder="Admin">
+      <small id="adminHelp" class="form-text text-muted col-sm-2">Admin Authority</small>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="userReviewer">Reviewer:</label>
+      <input [(ngModel)]='user.reviewer' name='Reviewer' type="checkbox" class="form-control col-sm-6" id="userReviewer"
+        aria-describedby="reviewerHelp" placeholder="Reviewer">
+      <small id="reviewerHelp" class="form-text text-muted col-sm-2">Reviewer Authority</small>
+    </div>
+    <div class='form-group'>
+      <button (click)='create()' class='btn btn-primary'>Create</button>
+    </div>
+  </form>
 </div>

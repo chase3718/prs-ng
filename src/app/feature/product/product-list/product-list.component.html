@@ -3,7 +3,7 @@
 <div class="component-content">
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
-    <span>
+    <span *ngIf="authenticatedUser.admin">
       <a routerLink='/product/create'><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
           title='Add New'></a>
     </span>
@@ -14,30 +14,30 @@
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
       <thead>
-        <th><a class="btn font-weight-bold" (click)="sortBy('vendor')">VENDOR</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>VENDOR</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('partNumber')">PART</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('name')">NAME</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('price')">PRICE</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('unit')">UNIT</a></th>
-        <th><a class="btn font-weight-bold">PHOTO</a></th>
-        <th><a class="btn font-weight-bold">ACTION</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>PHOTO</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>ACTION</a></th>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
     <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor='let product of products | sort:sortCriteria:sortOrder'>
-          <td>{{product.vendor.name}}</td>
+          <tr *ngFor='let product of products | sort:sortColumn:sortOrder'>
+          <td id="vendorName">{{product.vendor.name}}</td>
           <td>{{product.partNumber}}</td>
           <td>{{product.name}}</td>
-          <td>${{product.price}}</td>
+          <td>{{product.price | currency}}</td>
           <td>{{product.unit}}</td>
           <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
           <td class="actions">
             <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
                 src="../../../../assets/details.png"></a>&nbsp;
-            <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
+            <a *ngIf="authenticatedUser.admin" routerLink='/product/edit/{{product.id}}'><img width=20 height=20
                 src="../../../../assets/pencil-icon.png"></a>
           </td>
         </tr>

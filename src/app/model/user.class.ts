@@ -9,8 +9,8 @@ export class User {
     reviewer: boolean;
     admin: boolean;
 
-    constructor(id: number = 0, userName: string = '', password: string = '', firstName: string = '',
-                lastName: string = '', phoneNumber: string = '', email: string = '', reviewer: boolean = false,
+    constructor(id: number = null, userName: string = null, password: string = null, firstName: string = null,
+                lastName: string = null, phoneNumber: string = null, email: string = null, reviewer: boolean = false,
                 admin: boolean = false) {
         this.id = id;
         this.userName = userName;

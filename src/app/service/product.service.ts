@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JsonResponse } from '../model/json-response.class';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Product } from '../model/product.class';
 import { Vendor } from '../model/vendor.class';
 
@@ -20,6 +20,27 @@ export class ProductService {
 
   get(id: string): Observable<JsonResponse> {
     return this.http.get(this.url + id) as Observable<JsonResponse>;
+  }
+
+  upload(file: File, fd: FormData): Observable<any> {
+    return this.http.post('http://localhost:8080/files/post', file) as Observable<JsonResponse>;
+  }
+
+  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+
+    formdata.append('file', file);
+
+    const req = new HttpRequest('POST', 'http://localhost:8080/files/post', formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
+  fromFile(vendor: Vendor): Observable<JsonResponse> {
+    return this.http.post(this.url + 'from-file/', vendor) as Observable<JsonResponse>;
   }
 
   getFromVendor(vendor: string): Observable<JsonResponse> {

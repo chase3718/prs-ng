@@ -3,8 +3,6 @@
 
   <div class='lefthalf'>
     <span class='component-title'>{{title}}</span>
-    <span><a routerLink='/user/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
-          title='Add New'></a></span>
   </div>
 
   <table class="table table-sm" *ngIf='user'>
@@ -40,10 +38,10 @@
       <td>Reviewer</td>
       <td>{{ user.reviewer }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="authenticatedUser.admin || authenticatedUser.id == user.id">
       <td colspan="2">
         <a routerLink='/user/edit/{{user.id}}' class='btn btn-primary' title='Edit'>Edit</a>&nbsp;
-        <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
+        <button *ngIf="authenticatedUser.admin" (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
       </td>
     </tr>
   </table>

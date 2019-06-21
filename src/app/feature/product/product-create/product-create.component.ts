@@ -5,6 +5,9 @@ import { ProductService } from 'src/app/service/product.service';
 import { Router } from '@angular/router';
 import { Vendor } from 'src/app/model/vendor.class';
 import { VendorService } from 'src/app/service/vendor.service';
+import { SystemService } from 'src/app/service/system.service';
+import { NullTemplateVisitor } from '@angular/compiler';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-create',
@@ -17,12 +20,20 @@ export class ProductCreateComponent implements OnInit {
   jr: JsonResponse;
   product: Product = new Product();
   vendors: Vendor[];
+  fileVendor: Vendor;
+  selectedFiles: FileList = null;
+  currentFileUpload: File;
+  progress: { percentage: number } = { percentage: 0 }
 
   constructor(private productSvc: ProductService,
-              private vendorSvc: VendorService,
-              private router: Router) { }
+    private vendorSvc: VendorService,
+    private sysSvc: SystemService,
+    private router: Router) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn) {
+      this.router.navigate(['user/login']);
+    }
     this.vendorSvc.list().subscribe(
       jresp => {
         this.jr = jresp;
@@ -34,6 +45,41 @@ export class ProductCreateComponent implements OnInit {
         }
       }
     )
+  }
+
+  onFileSelected(event) {
+    console.log(event);
+    this.selectedFiles = event.target.files;
+  }
+
+  upload() {
+    if (this.selectedFiles != null) {
+      this.progress.percentage = 0;
+
+      this.currentFileUpload = this.selectedFiles.item(0)
+      this.productSvc.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          console.log('File is completely uploaded!');
+        }
+      })
+
+      this.selectedFiles = undefined
+      this.productSvc.fromFile(this.fileVendor).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            console.log("added" + this.jr.data);
+            alert('Upload Succesful');
+            this.router.navigate(['/product/list']);
+          } else {
+            alert('FAIL');
+            console.log(this.jr.errors);
+          }
+        }
+      )
+    }
   }
 
   create() {

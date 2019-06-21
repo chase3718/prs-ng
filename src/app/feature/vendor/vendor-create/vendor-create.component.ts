@@ -3,6 +3,7 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { Vendor } from 'src/app/model/vendor.class';
 import { VendorService } from 'src/app/service/vendor.service';
 import { Router } from '@angular/router';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-vendor-create',
@@ -16,9 +17,13 @@ export class VendorCreateComponent implements OnInit {
   vendor: Vendor = new Vendor();
 
   constructor(private vendorSvc: VendorService,
+              private sysSvc: SystemService,
               private router: Router) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
   }
 
   create() {

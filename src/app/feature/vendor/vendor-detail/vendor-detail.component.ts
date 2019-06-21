@@ -5,6 +5,8 @@ import { VendorService } from 'src/app/service/vendor.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/model/product.class';
 import { ProductService } from 'src/app/service/product.service';
+import { User } from 'src/app/model/user.class';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -18,13 +20,19 @@ export class VendorDetailComponent implements OnInit {
   vendor: Vendor;
   products: Product[];
   title: string = 'Vendor Detail';
+  authenticatedUser: User;
 
   constructor(private vendorSvc: VendorService,
               private productSvc: ProductService,
+              private sysSvc: SystemService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
+    this.authenticatedUser = this.sysSvc.data.user.instance;
     this.route.params.subscribe(params => this.vendorIdStr = params['id']);
     this.vendorSvc.get(this.vendorIdStr).subscribe(
       jresp => {

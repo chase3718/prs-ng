@@ -3,7 +3,7 @@
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
     <span>
-      <a routerLink="/user/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
+      <a *ngIf="authenticatedUser.admin" routerLink="/user/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
           title='Add New'></a>
     </span>
   </div>
@@ -13,20 +13,20 @@
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
       <thead>
-        <th><a class="btn font-weight-bold">USERNAME</a></th>
-        <th><a class="btn font-weight-bold">FIRST</a></th>
-        <th><a class="btn font-weight-bold">LAST</a></th>
-        <th><a class="btn font-weight-bold">PHONE</a></th>
-        <th><a class="btn font-weight-bold">EMAIL</a></th>
-        <th><a class="btn font-weight-bold disabled">PRIVILEGE</a></th>
-        <th><a class="btn font-weight-bold disabled">ACTION</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('userName')">USERNAME</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('firstName')">FIRST</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('lastName')">LAST</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('phoneNumber')">PHONE</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('email')">EMAIL</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>PRIVILEGE</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>ACTION</a></th>
       </thead>
     </table>
   </div>
   <div class="tbl-content" cellpadding="0" cellspacing="0" border="0">
     <table class="table-active table-bordered">
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users | sort:sortColumn:sortOrder">
           <td>{{user.userName}}</td>
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
@@ -36,7 +36,7 @@
           <td class="actions">
             <a routerLink='/user/detail/{{user.id}}'><img width=20 height=20
                 src="../../../../assets/details.png"></a>&nbsp;
-            <a routerLink='/user/edit/{{user.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
+            <a *ngIf="authenticatedUser.admin || authenticatedUser.id == user.id" routerLink='/user/edit/{{user.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
           </td>
         </tr>
       </tbody>

@@ -3,7 +3,7 @@
 
   <div class='lefthalf'>
     <span class='component-title'>{{title}}</span>
-    <span><a routerLink='/product/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
+    <span *ngIf="authenticatedUser.admin"><a routerLink='/product/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
           title='Add New'></a></span>
   </div>
 
@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <td>Price</td>
-      <td>${{ product.price }}</td>
+      <td>{{ product.price | currency}}</td>
     </tr>
     <tr>
       <td>Unit</td>
@@ -35,7 +35,7 @@
     <tr>
       <td><img src="../../../../assets/{{product.photoPath}}"></td>
     </tr>
-    <tr>
+    <tr *ngIf="authenticatedUser.admin">
       <td colspan="2">
         <a routerLink='/product/edit/{{product.id}}' class='btn btn-primary' title='Edit'>Edit</a>&nbsp;
         <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>

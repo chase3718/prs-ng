@@ -7,6 +7,7 @@ import { Product } from 'src/app/model/product.class';
 import { ProductService } from 'src/app/service/product.service';
 import { PurchaseRequestService } from 'src/app/service/purchase-request.service';
 import { PurchaseRequest } from 'src/app/model/purchase-request.class';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-prli-create',
@@ -15,7 +16,7 @@ import { PurchaseRequest } from 'src/app/model/purchase-request.class';
 })
 export class PrliEditComponent implements OnInit {
 
-  title: string = 'Prli Edit';
+  title: string = 'Purchase Request Line Item Edit';
   jr: JsonResponse;
   prli: PurchaseRequestLineItem;
   pr: PurchaseRequest;
@@ -23,12 +24,15 @@ export class PrliEditComponent implements OnInit {
   prliid: string;
 
   constructor(private prliSvc: PurchaseRequestLineItemService,
-              private prSvc: PurchaseRequestService,
+              private sysSvc: SystemService,
               private productSvc: ProductService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
     this.route.params.subscribe(params => this.prliid = params['id']);
     this.prliSvc.get(this.prliid).subscribe(
       jresp => {

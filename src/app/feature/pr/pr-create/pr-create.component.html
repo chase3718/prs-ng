@@ -8,11 +8,8 @@
 <div *ngIf='pr'>
   <div class="form-group row">
     <label class='col-form-label col-sm-2' for="prUser">User:</label>
-    <select id="user" class="form-control col-sm-6" [(ngModel)]="pr.user">
-      <option disabled selected>Please select a user</option>
-      <option *ngFor="let user of users" [ngValue]="user">{{user.userName}}
-      </option>
-    </select>
+    <input [(ngModel)]='pr.user.userName' name='user' type="text" class="form-control col-sm-6" id="prUser"
+      aria-describedby="userHelp" placeholder="Username" disabled>
   </div>
   <div class="form-group row">
     <label class='col-form-label col-sm-2' for="pr">Description:</label>

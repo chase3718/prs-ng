@@ -47,22 +47,20 @@
       <div class="tbl-header" style="overflow: auto">
         <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
           <thead>
-            <th><a class="btn font-weight-bold" (click)="sortBy('partNumber')">PRODUCT</a></th>
-            <th><a class="btn font-weight-bold" (click)="sortBy('name')">QUANTITY</a></th>
-            <th><a class="btn font-weight-bold" (click)="sortBy('price')">TOTAL</a></th>
-            <th><a class="btn font-weight-bold">ACTION</a></th>
+            <th><a class="btn font-weight-bold">PRODUCT</a></th>
+            <th><a class="btn font-weight-bold">QUANTITY</a></th>
+            <th><a class="btn font-weight-bold">TOTAL</a></th>
+            <th><a class="btn font-weight-bold disabled" disabled>ACTION</a></th>
           </thead>
         </table>
       </div>
       <div class="tbl-content">
         <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
           <tbody>
-
-
-            <tr *ngFor='let prli of prlis | sort:sortCriteria:sortOrder'>
+            <tr *ngFor='let prli of prlis'>
               <td>{{prli.product.name}}</td>
               <td>{{prli.quantity}}</td>
-              <td>${{prli.quantity * prli.product.price}}</td>
+              <td>{{prli.quantity * prli.product.price | currency}}</td>
               <td class="actions">
                 <a routerLink='/prli/edit/{{prli.id}}'><img width=20 height=20
                     src="../../../../assets/pencil-icon.png"></a>
@@ -72,8 +70,11 @@
           </tbody>
         </table>
         <br>
-        <div class='form-group'>
+        <div class='form-group' *ngIf="pr.status == 'New'">
           <button (click)='submit()' class='btn btn-primary'>Submit for review</button>
+        </div>
+        <div class='form-group' *ngIf="pr.status == 'Reject'">
+          <button (click)='reopen()' class='btn btn-primary'>Reopen</button>
         </div>
       </div>
     </div>
@@ -92,6 +93,9 @@
         <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
           <tbody>No line items to display. Please add new line item.</tbody>
         </table>
+      </div>
+      <div class='form-group' *ngIf="pr.status == 'Reject'">
+        <button (click)='reopen()' class='btn btn-primary'>Reopen</button>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ import { Product } from 'src/app/model/product.class';
 import { ProductService } from 'src/app/service/product.service';
 import { PurchaseRequestService } from 'src/app/service/purchase-request.service';
 import { PurchaseRequest } from 'src/app/model/purchase-request.class';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-prli-create',
@@ -15,20 +16,27 @@ import { PurchaseRequest } from 'src/app/model/purchase-request.class';
 })
 export class PrliCreateComponent implements OnInit {
 
-  title: string = 'Prli Create';
+  title: string = 'Add Purchase Request Line Item';
   jr: JsonResponse;
   prli: PurchaseRequestLineItem = new PurchaseRequestLineItem();
+  product: Product;
   pr: PurchaseRequest;
   products: Product[];
   prid: string;
+  currentProduct: string = "";
+  selectedProduct: Product;
 
   constructor(private prliSvc: PurchaseRequestLineItemService,
-              private prSvc: PurchaseRequestService,
-              private productSvc: ProductService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private sysSvc: SystemService,
+    private prSvc: PurchaseRequestService,
+    private productSvc: ProductService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn) {
+      this.router.navigate(['user/login']);
+    }
     this.route.params.subscribe(params => this.prid = params['id']);
     this.prSvc.get(this.prid).subscribe(
       jresp => {
@@ -54,14 +62,25 @@ export class PrliCreateComponent implements OnInit {
     );
   }
 
+  onProductChanged(productName) {
+    console.log(productName);
+    this.selectedProduct = this.getSelectedProductByName(productName);
+  }
+
+  getSelectedProductByName(selectedName: string): Product {
+    return this.products.find(product => product.name === selectedName);
+  }
+
   create() {
     this.prli.purchaseRequest = this.pr;
+    this.prli.product = this.selectedProduct;
+    console.log(this.product);
     this.prliSvc.create(this.prli).subscribe(
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
           console.log('gud');
-          this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
+          this.router.navigate(['/pr/lines/' + this.pr.id]);
           alert('Prli created succesfuly');
         } else {
           console.log(this.jr.errors);

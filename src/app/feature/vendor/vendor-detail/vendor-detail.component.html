@@ -3,8 +3,6 @@
 
   <div class='lefthalf'>
     <span class='component-title'>{{title}}</span>
-    <span><a routerLink='/vendor/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
-          title='Add New'></a></span>
   </div>
 
   <table class="table table-sm" *ngIf='vendor'>
@@ -32,7 +30,7 @@
       <td>Email</td>
       <td>{{ vendor.email }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="authenticatedUser.admin">
       <td colspan="2">
         <a routerLink='/vendor/edit/{{vendor.id}}' class='btn btn-primary' title='Edit'>Edit</a>&nbsp;
         <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
@@ -63,13 +61,13 @@
           <tr *ngFor='let product of products | sort:sortCriteria:sortOrder'>
             <td>{{product.partNumber}}</td>
             <td>{{product.name}}</td>
-            <td>${{product.price}}</td>
+            <td>{{product.price | currency}}</td>
             <td>{{product.unit}}</td>
             <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
             <td class="actions">
               <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
                   src="../../../../assets/details.png"></a>
-              <a routerLink='/product/edit/{{product.id}}'><img width=20 height=20
+              <a *ngIf="authenticatedUser.admin" routerLink='/product/edit/{{product.id}}'><img width=20 height=20
                   src="../../../../assets/pencil-icon.png"></a>
             </td>
           </tr>

@@ -1,8 +1,12 @@
-<nav class="bg-dark sticky-top" data-spy="affix-top">
-  <ul class="list-group list-group-horizontal">
-    <li class="list-group-item bg-dark" *ngFor="let mi of menuItems" title="{{mi.tooltip}}">
-      <a routerLink="{{mi.href}}" routerLinkActive="text-color-yellow" class="text-white"
-        style="text-shadow: 2px 2px #000000; text-decoration: none;">{{mi.display}}</a>
+<div class="sidenav sticky-top bg-dark">
+  <ul>
+    <li *ngFor="let mi of menuItems" title="{{mi.tooltip}}">
+      <a routerLink="{{mi.href}}" routerLinkActive="border: 1px white solid;" class="bg-dark text-white"
+        style="text-decoration: none;">{{mi.display}}</a>
+    </li>
+    <li>
+        <a (click)="logout()" class="bg-dark text-white"
+        style="text-decoration: none; float: right;">Log out</a>
     </li>
   </ul>
-</nav>
+</div>

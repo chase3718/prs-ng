@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     background-color: white;
     position: relative;
 }
@@ -19,17 +22,7 @@ thead th {
     text-align: left;
 }
 
-a:hover {
-    cursor: pointer;
-}
-
-a:hover .disabled {
-    cursor: auto;
-}
-
-a {
-    text-decoration: none;
-}
+.component-content {}
 
 .input-icon {
     position: relative;
@@ -86,6 +79,7 @@ th {
     font-size: 12px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 2px;
     text-transform: uppercase;
     margin: 0;
     border-width: 0;
@@ -109,4 +103,51 @@ td {
 
 *, ::after, ::before {
     box-sizing: content-box;
+}
+
+nav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.sidenav {
+    overflow: hidden;
+    border: 2px transparent solid;
+}
+
+.sidenav a {
+    float: left;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border: 1px transparent solid;
+}
+
+.sidenav ul {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    cursor: pointer;
+    background-color: inherit;
+    border: 1px white solid;
+}
+
+a:hover .disabled {
+    cursor: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer */
+    background: transparent;
 }

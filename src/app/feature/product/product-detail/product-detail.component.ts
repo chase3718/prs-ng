@@ -3,6 +3,8 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { Product } from 'src/app/model/product.class';
 import { ProductService } from 'src/app/service/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/model/user.class';
+import { SystemService } from 'src/app/service/system.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,12 +17,18 @@ export class ProductDetailComponent implements OnInit {
   productIdStr: string;
   product: Product;
   title: string = 'Product Detail';
+  authenticatedUser = User;
 
   constructor(private productSvc: ProductService,
+    private sysSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if (!this.sysSvc.data.user.loggedIn){
+      this.router.navigate(['user/login']);
+    }
+    this.authenticatedUser = this.sysSvc.data.user.instance;
     this.route.params.subscribe(params => this.productIdStr = params['id']);
     this.productSvc.get(this.productIdStr).subscribe(
       jresp => {

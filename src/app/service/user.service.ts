@@ -13,6 +13,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  login(user: User): Observable<JsonResponse> {
+    return this.http.post(this.url + 'authenticate', user) as Observable<JsonResponse>;
+  }
+
   list(): Observable<JsonResponse> {
     return this.http.get(this.url) as Observable<JsonResponse>;
   }

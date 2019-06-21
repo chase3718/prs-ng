@@ -1,0 +1,51 @@
+<app-menu></app-menu>
+<div class="container" style="margin-top: 20px">
+  <h1>Welcome, {{user.userName}}</h1>
+  <div class="container" style="min-width:1200">
+    <div *ngIf="prs">
+      <div *ngIf="prs.length > 0" style="min-width:1000">
+        <h3>Your requests</h3>
+        <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <th><a class="btn font-weight-bold">DESC.</a></th>
+            <th><a class="btn font-weight-bold">JUST.</a></th>
+            <th><a class="btn font-weight-bold">NEEDED</a></th>
+            <th><a class="btn font-weight-bold">DELIVERY</a></th>
+            <th><a class="btn font-weight-bold">STATUS</a></th>
+            <th><a class="btn font-weight-bold">TOTAL</a></th>
+            <th><a class="btn font-weight-bold">SUBMITTED</a></th>
+            <th><a class="btn font-weight-bold">ACTION</a></th>
+          </thead>
+        </table>
+
+        <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <tr *ngFor="let pr of prs">
+              <td>{{pr.description}}</td>
+              <td>{{pr.justification}}</td>
+              <td>{{pr.dateNeeded}}</td>
+              <td>{{pr.deliveryMode}}</td>
+              <td>{{pr.status}}</td>
+              <td>${{pr.total}}</td>
+              <td>{{pr.submittedDate}}</td>
+              <td class="actions" colspan="1">
+                <a routerLink='/pr/detail/{{pr.id}}'><img width=20 height=20
+                    src="../../../../assets/details.png"></a>&nbsp;
+                <a *ngIf="user.id == pr.user.id" routerLink='/pr/edit/{{pr.id}}'><img width=20 height=20
+                    src="../../../../assets/pencil-icon.png"></a>
+                <a *ngIf="user.id == pr.user.id" routerLink='/pr/lines/{{pr.id}}'><img width=20 height=20
+                    src="../../../../assets/lines.png"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <iframe
+      src="https://calendar.google.com/calendar/embed?src=has14a87nc302sbsl0j30evqc4%40group.calendar.google.com&ctz=America%2FNew_York"
+      style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>

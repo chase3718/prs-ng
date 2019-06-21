@@ -1,3 +1,49 @@
-<p>
-  pr-approve works!
-</p>
+<app-menu></app-menu>
+<div class='component-content'>
+
+  <div class='lefthalf'>
+    <span class='component-title'>{{title}}</span>
+    <span><a routerLink='/pr/create'><img id='createnew' width='20' height='20' src='assets/add-icon.png'
+          title='Add New'></a></span>
+  </div>
+
+  <table class="table table-sm" *ngIf='pr'>
+    <tr>
+      <td>Id</td>
+      <td>User</td>
+      <td>Description</td>
+      <td>Justification</td>
+      <td>Date needed</td>
+      <td>Delivery mode</td>
+      <td>Status</td>
+      <td>Total</td>
+      <td>Submitted date</td>
+    </tr>
+    <tr>
+      <td>{{ pr.id}}</td>
+      <td>{{ pr.user.userName }}</td>
+      <td>{{ pr.description }}</td>
+      <td>{{ pr.justification }}</td>
+      <td>{{ pr.dateNeeded }}</td>
+      <td>{{ pr.deliveryMode }}</td>
+      <td>{{ pr.status }}</td>
+      <td>${{ pr.total }}</td>
+      <td>{{pr.submittedDate}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button (click)="approve()" class='btn btn-primary' title='Approve'>Approve</button>&nbsp;
+        <button (click)="reject()" class='btn btn-danger' title='Reject'>Reject</button>
+      </td>
+    </tr>
+  </table>
+  <div *ngIf="rejected">
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="pr">Reason For Rejection:</label>
+      <input [(ngModel)]='pr.reasonForRejection' name='ReasonForRejection' type="text" class="form-control col-sm-6"
+        id="prReasonForRejection" aria-describedby="rejectHelp">
+      <small id="rejectHelp" class="form-text text-muted col-sm-2">Why is this being rejected</small>
+    </div>
+    <button (click)="sendReject()" class='btn btn-danger' title='Reject'>Send Rejection</button>
+  </div>
+</div>

@@ -25,12 +25,28 @@ export class PurchaseRequestService {
     return this.http.put(this.url + 'submit-review', purchaseRequest) as Observable<JsonResponse>;
   }
 
+  sendReject(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
+    return this.http.put(this.url + 'reject', purchaseRequest) as Observable<JsonResponse>;
+  }
+
+  approve(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
+    return this.http.put(this.url + 'approve', purchaseRequest) as Observable<JsonResponse>;
+  }
+
+  reopen(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
+    return this.http.put(this.url + 'reopen', purchaseRequest) as Observable<JsonResponse>;
+  }
+
   create(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
     return this.http.post(this.url, purchaseRequest) as Observable<JsonResponse>;
   }
 
   get(id: string): Observable<JsonResponse> {
     return this.http.get(this.url + id) as Observable<JsonResponse>;
+  }
+
+  getFromUser(id: string): Observable<JsonResponse> {
+    return this.http.get(this.url + 'user/' + id) as Observable<JsonResponse>;
   }
 
   update(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
