@@ -2,14 +2,14 @@
 <div class="component-content">
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
-    <span>
+    <span class="create-new">
       <a *ngIf="authenticatedUser.admin" routerLink="/vendor/create"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
           title='Add New'></a>
     </span>
   </div>
 </div>
 <p *ngIf="!vendors">Loading ...</p>
-<div *ngIf="vendors">
+<div class="table" *ngIf="vendors">
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
       <thead>

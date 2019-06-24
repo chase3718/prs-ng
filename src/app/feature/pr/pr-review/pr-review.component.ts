@@ -5,6 +5,7 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { SystemService } from 'src/app/service/system.service';
 import { User } from 'src/app/model/user.class';
 import { Router } from '@angular/router';
+import { SortablePurchaseRequest } from 'src/app/model/sortable-purchase-request';
 
 @Component({
   selector: 'app-pr-review',
@@ -14,9 +15,11 @@ import { Router } from '@angular/router';
 export class PrReviewComponent implements OnInit {
   jr: JsonResponse;
   prs: PurchaseRequest[];
-  title: string = 'Purchase Request List';
+  sortablePrs: SortablePurchaseRequest[];
+  title: string = 'Purchase Request Review List';
   user: User;
-
+  sortColumn: string = 'name';
+  sortOrder: string = 'asc';
   constructor(private prSvc: PurchaseRequestService,
     private router: Router,
     private sysSvc: SystemService) { }
@@ -31,9 +34,12 @@ export class PrReviewComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.prs = this.jr.data as PurchaseRequest[];
-          console.log(jresp);
+          this.sortablePrs = this.prs as SortablePurchaseRequest[];
+          this.sortablePrs.forEach(sprs => {
+            sprs.userName = sprs.user.userName;
+          })
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     );
@@ -41,11 +47,18 @@ export class PrReviewComponent implements OnInit {
 
   review(): PurchaseRequest[] {
     let inReview = [];
-    for (let i of this.prs) {
+    for (let i of this.sortablePrs) {
       if (i.status === 'Review' && i.user.id !== this.user.id) {
         inReview.push(i);
       }
     }
     return inReview;
+  }
+
+  sortBy(col: string) {
+    if (this.sortColumn === col) {
+      this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
+    }
+    this.sortColumn = col;
   }
 }

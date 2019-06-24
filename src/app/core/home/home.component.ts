@@ -31,9 +31,6 @@ export class HomeComponent implements OnInit {
           this.jr = jresp;
           if (this.jr.errors == null) {
             this.prs = this.jr.data as PurchaseRequest[];
-            console.log(this.jr.data)
-            console.log(this.prs);
-            console.log("All good");
           } else {
             alert('There was an issue');
             console.log(this.jr.errors);

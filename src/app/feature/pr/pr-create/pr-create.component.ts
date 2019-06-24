@@ -26,7 +26,6 @@ export class PrCreateComponent implements OnInit {
     if (!this.sysSvc.data.user.loggedIn){
       this.router.navigate(['user/login']);
     }
-    console.log('logged in', this.sysSvc.data.user.loggedIn);
     if (this.sysSvc.data.user.loggedIn) {
       this.pr.user = this.sysSvc.data.user.instance;
     } else {
@@ -39,12 +38,11 @@ export class PrCreateComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/pr/list']);
-          alert('Pr created succesfuly');
+          alert('Purchase request created succesfuly');
         } else {
           console.log(this.jr.errors);
-          alert('Failed to create pr');
+          alert('Failed to create purchase request');
         }
       }
     )

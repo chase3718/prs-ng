@@ -16,7 +16,6 @@ export class SortPipe implements PipeTransform {
     }
 
     transform(objArr: any[], property: string, order: string = 'asc'): any {
-        console.log('Sort:', objArr, property, order);
 
         let sorted = objArr.sort((a, b): number => {
 
@@ -24,7 +23,9 @@ export class SortPipe implements PipeTransform {
             let x = this.normalize(a[property]);
             let y = this.normalize(b[property]);
 
-            if (x === y) return 0;
+            if (x === y) {
+                return 0;
+            }
             if (order === 'desc') {
                 return (x > y) ? -1 : 1;
             } else {
@@ -32,7 +33,6 @@ export class SortPipe implements PipeTransform {
             }
 
         });
-        console.log('Sorted: ', sorted);
         return sorted;
     }
 }

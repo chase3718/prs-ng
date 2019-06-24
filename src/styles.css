@@ -22,7 +22,9 @@ thead th {
     text-align: left;
 }
 
-.component-content {}
+.component-content {
+    margin-left: 10px;
+}
 
 .input-icon {
     position: relative;
@@ -59,6 +61,11 @@ table {
     table-layout: fixed;
 }
 
+.table {
+    height: 70%;
+    margin-bottom: 10px;
+}
+
 .tbl-header {
     width: 1300px;
     margin: 0;
@@ -67,9 +74,10 @@ table {
 
 .tbl-content {
     width: 1300px;
-    height: 420px;
+    height: 100%;
     overflow-x: auto;
     margin: 0;
+    margin-bottom: 10px;
     padding: 0;
 }
 
@@ -130,6 +138,14 @@ nav {
     padding: 0;
 }
 
+.create-new a:hover {
+    border: none !important;
+}
+
+.actions a:hover {
+    border: none !important;
+}
+
 a:hover {
     cursor: pointer;
     background-color: inherit;
@@ -145,8 +161,6 @@ a {
 }
 
 footer {
-    position: relative;
-    bottom: 0;
     width: 100%;
     /* Height of the footer */
     background: transparent;

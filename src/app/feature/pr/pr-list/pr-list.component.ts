@@ -5,6 +5,7 @@ import { JsonResponse } from 'src/app/model/json-response.class';
 import { User } from 'src/app/model/user.class';
 import { SystemService } from 'src/app/service/system.service';
 import { Router } from '@angular/router';
+import { SortablePurchaseRequest } from 'src/app/model/sortable-purchase-request';
 
 @Component({
   selector: 'app-pr-list',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class PrListComponent implements OnInit {
   jr: JsonResponse;
   prs: PurchaseRequest[];
+  sortablePrs: SortablePurchaseRequest[];
   title: string = 'Purchase Request List';
   authenticatedUser: User;
   sortColumn: string = 'name';
@@ -32,9 +34,12 @@ export class PrListComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.prs = this.jr.data as PurchaseRequest[];
-          console.log(jresp);
+          this.sortablePrs = this.prs as SortablePurchaseRequest[];
+          this.sortablePrs.forEach(sprs => {
+            sprs.userName = sprs.user.userName;
+          });
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     );
@@ -43,7 +48,6 @@ export class PrListComponent implements OnInit {
   sortBy(col: string) {
     if (this.sortColumn === col) {
       this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
-      console.log(`sortBy(${col}), order(${this.sortOrder})`);
     }
     this.sortColumn = col;
   }

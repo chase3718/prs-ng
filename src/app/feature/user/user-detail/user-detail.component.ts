@@ -34,7 +34,6 @@ export class UserDetailComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.user = this.jr.data as User;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -47,9 +46,8 @@ export class UserDetailComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/user/list']);
-          alert('User Deleted succesfuly');
+          alert('User deleted succesfuly');
         } else {
           alert('Failed to delete user');
         }

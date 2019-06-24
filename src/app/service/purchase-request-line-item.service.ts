@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { JsonResponse } from '../model/json-response.class';
 import { HttpClient } from '@angular/common/http';
 import { PurchaseRequestLineItem } from '../model/purchase-request-line-item.class';
+import { PurchaseRequest } from '../model/purchase-request.class';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,9 @@ export class PurchaseRequestLineItemService {
 
   delete(id: number): Observable<JsonResponse> {
     return this.http.delete(this.url + id) as Observable<JsonResponse>;
+  }
+
+  deleteByPr(purchaseRequest: PurchaseRequest): Observable<JsonResponse>{
+    return this.http.delete(this.url + 'delete-by-pr/' + purchaseRequest.id) as Observable<JsonResponse>;
   }
 }

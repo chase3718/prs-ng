@@ -2,10 +2,6 @@
 <div class="component-content">
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
-    <span>
-      <a routerLink="/pr/create/"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
-          title='Add New'></a>
-    </span>
   </div>
 </div>
 <p *ngIf="!prs">Loading ...</p>
@@ -13,35 +9,32 @@
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
       <thead>
-        <th><a class="btn font-weight-bold">USER</a></th>
-        <th><a class="btn font-weight-bold">DESC.</a></th>
-        <th><a class="btn font-weight-bold">JUST.</a></th>
-        <th><a class="btn font-weight-bold">NEEDED</a></th>
-        <th><a class="btn font-weight-bold">DELIVERY</a></th>
-        <th><a class="btn font-weight-bold">STATUS</a></th>
-        <th><a class="btn font-weight-bold">TOTAL</a></th>
-        <th><a class="btn font-weight-bold">SUBMITTED</a></th>
-        <th><a class="btn font-weight-bold">ACTION</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('userName')">USER</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>DESC.</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>JUST.</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('dateNeeded')">NEEDED</a></th>
+        <th><a class="btn font-weight-bold disabled" disabled>DELIVERY</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('total')">TOTAL</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('submittedDate')">SUBMITTED</a></th>
+        <th><a class="btn font-weight-bold diabled" disabled>ACTION</a></th>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
     <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor="let pr of review()">
-            <td>{{pr.user.userName}}</td>
-            <td>{{pr.description}}</td>
-            <td>{{pr.justification}}</td>
-            <td>{{pr.dateNeeded}}</td>
-            <td>{{pr.deliveryMode}}</td>
-            <td>{{pr.status}}</td>
-            <td>${{pr.total}}</td>
-            <td>{{pr.submittedDate}}</td>
-            <td class="actions" colspan="1">
-              <a routerLink='/pr/approve/{{pr.id}}'><img width=20 height=20
-                  src="../../../../assets/review.png"></a>
-            </td>
-          </tr>
+        <tr *ngFor="let pr of review() | sort:sortColumn:sortOrder">
+          <td>{{pr.user.userName}}</td>
+          <td>{{pr.description}}</td>
+          <td>{{pr.justification}}</td>
+          <td>{{pr.dateNeeded}}</td>
+          <td>{{pr.deliveryMode}}</td>
+          <td>${{pr.total}}</td>
+          <td>{{pr.submittedDate}}</td>
+          <td class="actions" colspan="1">
+            <a routerLink='/pr/approve/{{pr.id}}'><img width=20 height=20 src="../../../../assets/review.png"></a>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

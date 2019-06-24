@@ -79,12 +79,11 @@ export class PrliCreateComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/pr/lines/' + this.pr.id]);
-          alert('Prli created succesfuly');
+          alert('Line item created succesfuly');
         } else {
           console.log(this.jr.errors);
-          alert('Failed to create prli');
+          alert('Failed to create line item');
         }
       }
     )

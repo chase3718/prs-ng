@@ -41,6 +41,12 @@
       aria-describedby="unitHelp" placeholder="Unit" maxLength="255">
     <small id="unitHelp" class="form-text text-muted col-sm-2">product unit</small>
   </div>
+  <div class="form-group row">
+    <label class='col-form-label col-sm-2' for="productUnit">Image URL:</label>
+    <input [(ngModel)]='product.photoPath' name='Photo' type="url" class="form-control col-sm-6" id="productPhoto"
+      aria-describedby="photoHelp" placeholder="Photo" maxLength="255">
+    <small id="photoHelp" class="form-text text-muted col-sm-2">add an image by its url</small>
+  </div>
   <!-- <div class="form-group row">
       <label class='col-form-label col-sm-2' for="productPhotoPath">Product Photo:</label>
       <input [(ngModel)]='product.photoPath' name='PhotoPath' type="file" id="productPhoto"

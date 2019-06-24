@@ -35,7 +35,6 @@ export class VendorEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.vendor = this.jr.data as Vendor;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -48,9 +47,8 @@ export class VendorEditComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/vendor/list']);
-          alert('Vendor Updated succesfuly');
+          alert('Vendor updated succesfuly');
         } else {
           console.log(this.jr.errors);
           alert('Failed to update vendor');

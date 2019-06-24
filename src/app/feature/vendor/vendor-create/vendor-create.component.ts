@@ -31,7 +31,6 @@ export class VendorCreateComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/vendor/list']);
           alert('Vendor created succesfuly');
         } else {

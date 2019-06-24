@@ -34,7 +34,6 @@ export class UserEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.user = this.jr.data as User;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -47,9 +46,8 @@ export class UserEditComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/user/list']);
-          alert('User Updated succesfuly');
+          alert('User updated succesfuly');
         } else {
           console.log(this.jr.errors);
           alert('Failed to update user');

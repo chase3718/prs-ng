@@ -33,9 +33,8 @@ export class VendorListComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.vendors = this.jr.data as Vendor[];
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     );
@@ -44,7 +43,6 @@ export class VendorListComponent implements OnInit {
   sortBy(col: string) {
     if (this.sortColumn === col) {
       this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
-      console.log(`sortBy(${col}), order(${this.sortOrder})`);
     }
     this.sortColumn = col;
   }

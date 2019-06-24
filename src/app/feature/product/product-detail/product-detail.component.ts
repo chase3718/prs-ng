@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     this.authenticatedUser = this.sysSvc.data.user.instance;
@@ -35,7 +35,6 @@ export class ProductDetailComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.product = this.jr.data as Product;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -46,10 +45,13 @@ export class ProductDetailComponent implements OnInit {
   remove() {
     this.productSvc.delete(this.product).subscribe(
       jresp => {
-        this.jr = jresp;
-        console.log('gud');
-        this.router.navigate(['/product/list']);
-        alert('Product Deleted succesfuly');
+        if (this.jr.errors == null) {
+          this.jr = jresp;
+          this.router.navigate(['/product/list']);
+          alert('Product deleted succesfuly');
+        } else {
+          console.log(this.jr.errors);
+        }
       }
     )
   }

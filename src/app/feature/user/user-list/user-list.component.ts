@@ -31,9 +31,8 @@ export class UserListComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.users = this.jr.data as User[];
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     );
@@ -41,7 +40,6 @@ export class UserListComponent implements OnInit {
   sortBy(col: string) {
     if (this.sortColumn === col) {
       this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
-      console.log(`sortBy(${col}), order(${this.sortOrder})`);
     }
     this.sortColumn = col;
   }

@@ -39,9 +39,8 @@ export class PrliEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.prli = this.jr.data as PurchaseRequestLineItem;
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     )
@@ -50,9 +49,8 @@ export class PrliEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.products = this.jr.data as Product[];
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     );
@@ -64,12 +62,11 @@ export class PrliEditComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
-          alert('Prli updated succesfuly');
+          alert('Line item updated succesfuly');
         } else {
           console.log(this.jr.errors);
-          alert('Failed to update prli');
+          alert('Failed to update line item');
         }
       }
     )

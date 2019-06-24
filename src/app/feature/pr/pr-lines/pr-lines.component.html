@@ -6,35 +6,38 @@
   </div>
 
   <p *ngIf="!pr">Loading ...</p>
-  <div *ngIf="pr">
-
-    <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
-      <thead class="thead-dark">
-        <th><a class="btn font-weight-bold">USER</a></th>
-        <th><a class="btn font-weight-bold">NEEDED</a></th>
-        <th><a class="btn font-weight-bold">DELIVERY</a></th>
-        <th><a class="btn font-weight-bold">STATUS</a></th>
-        <th><a class="btn font-weight-bold">TOTAL</a></th>
-        <th><a class="btn font-weight-bold">SUBMITTED</a></th>
-      </thead>
-
-      <tbody>
-        <tr class="table-bordered table-active tbody-active">
-          <td>{{pr.user.userName}}</td>
-          <td>{{pr.dateNeeded}}</td>
-          <td>{{pr.deliveryMode}}</td>
-          <td>{{pr.status}}</td>
-          <td>${{pr.total}}</td>
-          <td>{{pr.submittedDate}}</td>
-        </tr>
-      </tbody>
-    </table>
-
+  <div class="table" *ngIf="pr">
+    <div class="tbl-header" style="overflow: auto">
+      <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <th><a class="btn font-weight-bold">USER</a></th>
+          <th><a class="btn font-weight-bold">NEEDED</a></th>
+          <th><a class="btn font-weight-bold">DELIVERY</a></th>
+          <th><a class="btn font-weight-bold">STATUS</a></th>
+          <th><a class="btn font-weight-bold">TOTAL</a></th>
+          <th><a class="btn font-weight-bold">SUBMITTED</a></th>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          <tr>
+            <td>{{pr.user.userName}}</td>
+            <td>{{pr.dateNeeded}}</td>
+            <td>{{pr.deliveryMode}}</td>
+            <td>{{pr.status}}</td>
+            <td>${{pr.total}}</td>
+            <td>{{pr.submittedDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="component-content">
     <div class="lefthalf">
       <span class="component-title">Line Items&nbsp;</span>
-      <span>
+      <span class="create-new">
         <a routerLink="/prli/create/{{pr.id}}"><img id='createnew' width='20' height='20'
             src='../../../../assets/add-icon.png' title='Add New'></a>
       </span>
@@ -48,6 +51,7 @@
         <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
           <thead>
             <th><a class="btn font-weight-bold">PRODUCT</a></th>
+            <th><a class="btn font-weight-bold">PRICE</a></th>
             <th><a class="btn font-weight-bold">QUANTITY</a></th>
             <th><a class="btn font-weight-bold">TOTAL</a></th>
             <th><a class="btn font-weight-bold disabled" disabled>ACTION</a></th>
@@ -59,6 +63,7 @@
           <tbody>
             <tr *ngFor='let prli of prlis'>
               <td>{{prli.product.name}}</td>
+              <td>{{prli.product.price | currency}}</td>
               <td>{{prli.quantity}}</td>
               <td>{{prli.quantity * prli.product.price | currency}}</td>
               <td class="actions">
@@ -73,7 +78,7 @@
         <div class='form-group' *ngIf="pr.status == 'New'">
           <button (click)='submit()' class='btn btn-primary'>Submit for review</button>
         </div>
-        <div class='form-group' *ngIf="pr.status == 'Reject'">
+        <div class='form-group' *ngIf="pr.status == 'Rejected'">
           <button (click)='reopen()' class='btn btn-primary'>Reopen</button>
         </div>
       </div>

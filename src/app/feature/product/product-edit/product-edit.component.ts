@@ -36,7 +36,6 @@ export class ProductEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.product = this.jr.data as Product;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -47,9 +46,8 @@ export class ProductEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.vendors = this.jr.data as Vendor[];
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     )
@@ -60,9 +58,8 @@ export class ProductEditComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/product/list']);
-          alert('Product Updated succesfuly');
+          alert('Product updated succesfuly');
         } else {
           console.log(this.jr.errors);
           alert('Failed to update product');

@@ -32,7 +32,6 @@ export class PrEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.pr = this.jr.data as PurchaseRequest;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -45,7 +44,6 @@ export class PrEditComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/pr/list']);
           alert('PurchaseRequest Updated succesfuly');
         } else {

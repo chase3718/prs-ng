@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
       if (user.reviewer || user.admin) {
         this.menuItems.push(new MenuItem('Review', '/pr/review', 'This is the pr review menu item'));
       }
-      this.menuItems.push(new MenuItem('About', '/about', 'This is the about menu item'));
+      //this.menuItems.push(new MenuItem('About', '/about', 'This is the about menu item'));
     } else {
       this.menuItems.push(new MenuItem('Login', '/user/login', 'This is the login menu item'));
     }

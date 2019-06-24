@@ -31,7 +31,6 @@ export class UserCreateComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/user/list']);
           alert('User created succesfuly');
         } else {

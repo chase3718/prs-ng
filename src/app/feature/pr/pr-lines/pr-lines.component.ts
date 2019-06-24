@@ -37,7 +37,6 @@ export class PrLinesComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.pr = this.jr.data as PurchaseRequest;
-          console.log(this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -48,7 +47,6 @@ export class PrLinesComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.prlis = this.jr.data as PurchaseRequestLineItem[];
-          console.log("f", this.jr);
         } else {
           console.log(this.jr.errors);
         }
@@ -61,8 +59,13 @@ export class PrLinesComponent implements OnInit {
     this.prliSvc.delete(id).subscribe(
       jresp => {
         this.jr = jresp;
-        console.log('gud');
-        this.router.navigate(['/reroute/' + this.purchaseRequestIdStr]);
+        if (this.jr.errors == null) {
+          alert('Line item succesfully removed');
+          this.router.navigate(['/reroute/' + this.purchaseRequestIdStr]);
+        } else {
+          alert('Failed to remove line item');
+          console.log(this.jr.errors);
+        }
       }
     )
   }
@@ -72,11 +75,11 @@ export class PrLinesComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
+          alert('Purchase request succesfuly created');
           this.router.navigate(['/pr/list']);
         } else {
-          console.log(this.jr.errors);
           alert('Failed to create purchase request');
+          console.log(this.jr.errors);
         }
       }
     )
@@ -87,11 +90,11 @@ export class PrLinesComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
-          location.reload();
+          alert('Purchase request succesfuly reopened');
+          this.router.navigate(['/reroute/' + this.purchaseRequestIdStr]);
         } else {
-          console.log(this.jr.errors);
           alert('Could not reopen this purchase request');
+          console.log(this.jr.errors);
         }
       }
     )
@@ -100,7 +103,6 @@ export class PrLinesComponent implements OnInit {
   sortBy(col: string) {
     if (this.sortColumn === col) {
       this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc';
-      console.log(`sortBy(${col}), order(${this.sortOrder})`);
     }
     this.sortColumn = col;
   }

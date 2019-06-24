@@ -34,6 +34,7 @@ import { PrApproveComponent } from './feature/pr/pr-approve/pr-approve.component
 import { HomeComponent } from './core/home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { RerouteComponent } from './core/reroute/reroute.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { RerouteComponent } from './core/reroute/reroute.component';
     PrApproveComponent,
     HomeComponent,
     FooterComponent,
-    RerouteComponent
+    RerouteComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

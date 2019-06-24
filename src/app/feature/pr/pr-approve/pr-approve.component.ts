@@ -33,8 +33,8 @@ export class PrApproveComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.pr = this.jr.data as PurchaseRequest;
-          console.log(this.jr);
         } else {
+          alert('Unable to approve the purchase request at this time');
           console.log(this.jr.errors);
         }
       }
@@ -53,7 +53,8 @@ export class PrApproveComponent implements OnInit {
           alert('Rejected');
           this.router.navigate(['/pr/review']);
         } else {
-          alert(this.jr.errors);
+          alert('Unable to reject purchase request');
+          console.log(this.jr.errors);
         }
       }
     )
@@ -64,10 +65,11 @@ export class PrApproveComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          alert('Rejected');
+          alert('Purchase Request Approved');
           this.router.navigate(['/pr/review']);
         } else {
-          alert(this.jr.errors);
+          alert('Unable to approve purchase request');
+          console.log(this.jr.errors);
         }
       }
     )

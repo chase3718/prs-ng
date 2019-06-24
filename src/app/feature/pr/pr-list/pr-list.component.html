@@ -2,18 +2,18 @@
 <div class="component-content">
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
-    <span>
-      <a routerLink="/pr/create/"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
-          title='Add New'></a>
+    <span class="create-new">
+      <a *ngIf="authenticatedUser.admin" routerLink="/pr/create/"><img id='createnew' width='20' height='20'
+          src='../../../../assets/add-icon.png' title='Add New'></a>
     </span>
   </div>
 </div>
 <p *ngIf="!prs">Loading ...</p>
-<div *ngIf="prs">
+<div class="table" *ngIf="prs">
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
       <thead>
-        <th><a class="btn font-weight-bold disabled" disabled>USER</a></th>
+        <th><a class="btn font-weight-bold" (click)="sortBy('userName')">USER</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('description')">DESC.</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('justification')">JUST.</a></th>
         <th><a class="btn font-weight-bold" (click)="sortBy('dateNeeded')">NEEDED</a></th>
@@ -28,7 +28,7 @@
   <div class="tbl-content">
     <table class="table-active table-bordered" cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor="let pr of prs | sort:sortColumn:sortOrder">
+        <tr *ngFor="let pr of sortablePrs | sort:sortColumn:sortOrder">
           <td>{{pr.user.userName}}</td>
           <td>{{pr.description}}</td>
           <td>{{pr.justification}}</td>
@@ -39,12 +39,14 @@
           <td>{{pr.submittedDate}}</td>
           <td class="actions" colspan="1">
             <a routerLink='/pr/detail/{{pr.id}}'><img width=20 height=20 src="../../../../assets/details.png"></a>&nbsp;
-            <a *ngIf="authenticatedUser.id == pr.user.id" routerLink='/pr/edit/{{pr.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
-            <a *ngIf="authenticatedUser.id == pr.user.id" routerLink='/pr/lines/{{pr.id}}'><img width=20 height=20 src="../../../../assets/lines.png"></a>
+            <a *ngIf="authenticatedUser.id == pr.user.id || authenticatedUser.admin"
+              routerLink='/pr/edit/{{pr.id}}'><img width=20 height=20 src="../../../../assets/pencil-icon.png"></a>
+            <a *ngIf="authenticatedUser.id == pr.user.id || authenticatedUser.admin"
+              routerLink='/pr/lines/{{pr.id}}'><img width=20 height=20 src="../../../../assets/lines.png"></a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  
+
 </div>

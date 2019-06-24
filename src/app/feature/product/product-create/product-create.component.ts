@@ -39,16 +39,14 @@ export class ProductCreateComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.vendors = this.jr.data as Vendor[];
-          console.log(jresp);
         } else {
-          console.log(jresp.errors);
+          console.log(this.jr.errors);
         }
       }
     )
   }
 
   onFileSelected(event) {
-    console.log(event);
     this.selectedFiles = event.target.files;
   }
 
@@ -61,7 +59,7 @@ export class ProductCreateComponent implements OnInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
-          console.log('File is completely uploaded!');
+          
         }
       })
 
@@ -70,11 +68,10 @@ export class ProductCreateComponent implements OnInit {
         jresp => {
           this.jr = jresp;
           if (this.jr.errors == null) {
-            console.log("added" + this.jr.data);
-            alert('Upload Succesful');
+            alert('Upload succesful');
             this.router.navigate(['/product/list']);
           } else {
-            alert('FAIL');
+            alert('Unable to upload file');
             console.log(this.jr.errors);
           }
         }
@@ -89,7 +86,6 @@ export class ProductCreateComponent implements OnInit {
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log('gud');
           this.router.navigate(['/product/list']);
           alert('Product created succesfuly');
         } else {

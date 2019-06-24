@@ -5,6 +5,7 @@ import { PurchaseRequestService } from 'src/app/service/purchase-request.service
 import { Router, ActivatedRoute } from '@angular/router';
 import { SystemService } from 'src/app/service/system.service';
 import { User } from 'src/app/model/user.class';
+import { PurchaseRequestLineItemService } from 'src/app/service/purchase-request-line-item.service';
 
 @Component({
   selector: 'app-pr-detail',
@@ -20,9 +21,10 @@ export class PrDetailComponent implements OnInit {
   authenticatedUser: User;
 
   constructor(private prSvc: PurchaseRequestService,
-    private sysSvc: SystemService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+              private prliSvc: PurchaseRequestLineItemService,
+              private sysSvc: SystemService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (!this.sysSvc.data.user.loggedIn) {
@@ -44,16 +46,24 @@ export class PrDetailComponent implements OnInit {
   }
 
   remove() {
+    this.prliSvc.deleteByPr(this.pr).subscribe(
+      jresp => {
+        this.jr = jresp;
+        if (this.jr.errors == null) {
+        } else {
+          console.log(this.jr.errors);
+        }
+      }
+    )
     this.prSvc.delete(this.pr).subscribe(
       jresp => {
         this.jr = jresp;
         if (this.jr.errors == null) {
-          console.log(this.jr);
           alert('PurchaseRequest deleted succesfuly');
           this.router.navigate(['/pr/list']);
         } else {
-          console.log(this.jr);
           alert('Failed to delete purchase request');
+          console.log(this.jr.errors);
         }
       }
     )
