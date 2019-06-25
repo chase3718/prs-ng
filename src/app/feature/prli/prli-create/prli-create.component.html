@@ -3,26 +3,26 @@
   <div class="lefthalf">
     <span class="component-title">{{title}}</span>
   </div>
-</div>
-<p *ngIf='!prli'>Loading...</p>
-<div *ngIf='prli'>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="prliProduct">Product:</label>
-    <input type="text" list="productList" name="product" [(ngModel)]='currentProduct'
-      (change)="onProductChanged(currentProduct)">
-    <datalist id="productList">
-      <select>
-        <option *ngFor="let product of products" [value]="product.name">{{product.vendor.name}}</option>
-      </select>
-    </datalist>
-  </div>
-  <div class="form-group row">
-    <label class='col-form-label col-sm-2' for="pr">Quantity:</label>
-    <input [(ngModel)]='prli.quantity' name='Quantity' type="number" class="form-control col-sm-6" id="prliDesc"
-      aria-quanribedby="quanHelp" placeholder="Quantity" min=1>
-    <small id="quanHelp" class="form-text text-muted col-sm-2">Quantity of Products</small>
-  </div>
-  <div class='form-group'>
-    <button (click)='create()' class='btn btn-primary'>Add</button>
+  <p *ngIf='!prli'>Loading...</p>
+  <div *ngIf='prli'>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="prliProduct">Product:</label>
+      <input type="text" list="productList" name="product" [(ngModel)]='currentProduct'
+        (change)="onProductChanged(currentProduct)">
+      <datalist id="productList">
+        <select>
+          <option *ngFor="let product of products" [value]="product.name">{{product.vendor.name}}</option>
+        </select>
+      </datalist>
+    </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="pr">Quantity:</label>
+      <input [(ngModel)]='prli.quantity' name='Quantity' type="number" class="form-control col-sm-6" id="prliDesc"
+        aria-quanribedby="quanHelp" placeholder="Quantity" min=1>
+      <small id="quanHelp" class="form-text text-muted col-sm-2">Quantity of Products</small>
+    </div>
+    <div class='form-group'>
+      <button (click)='create()' class='btn btn-primary'>Add</button>
+    </div>
   </div>
 </div>

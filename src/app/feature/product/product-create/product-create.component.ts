@@ -24,6 +24,7 @@ export class ProductCreateComponent implements OnInit {
   selectedFiles: FileList = null;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 }
+  uploaded = false;
 
   constructor(private productSvc: ProductService,
     private vendorSvc: VendorService,
@@ -62,20 +63,9 @@ export class ProductCreateComponent implements OnInit {
 
         }
       })
-
-      this.selectedFiles = undefined
-      this.productSvc.fromFile(this.fileVendor).subscribe(
-        jresp => {
-          this.jr = jresp;
-          if (this.jr.errors == null) {
-            alert('Upload succesful');
-            this.router.navigate(['/product/list']);
-          } else {
-            alert('Unable to upload file');
-            console.log(this.jr.errors);
-          }
-        }
-      )
+      
+      this.selectedFiles = undefined;
+      this.uploaded = true;
     }
   }
 
@@ -86,6 +76,21 @@ export class ProductCreateComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  getFromFile() {
+    this.productSvc.fromFile(this.fileVendor).subscribe(
+      jresp => {
+        this.jr = jresp;
+        if (this.jr.errors == null) {
+          alert('Upload succesful');
+          this.router.navigate(['/product/list']);
+        } else {
+          alert('Unable to upload file');
+          console.log(this.jr.errors);
+        }
+      }
+    )
   }
 
   create() {

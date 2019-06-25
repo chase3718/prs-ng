@@ -7,19 +7,19 @@
           title='Add New'></a>
     </span>
   </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+      </div>
+      <input type="text" class="form-control" name="searchString" placeholder="Type to search..."
+        [(ngModel)]="searchString" />
+    </div>
+  </div>
 </div>
 <p *ngIf="!products">Loading ...</p>
 <div class="table" *ngIf="products">
   <form>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="glyphicon glyphicon-search"></i>
-        </div>
-        <input type="text" class="form-control" name="searchString" placeholder="Type to search..."
-          [(ngModel)]="searchString" />
-      </div>
-    </div>
   </form>
   <div class="tbl-header" style="overflow: auto">
     <table class="table-dark" cellpadding="0" cellspacing="0" border="0">
