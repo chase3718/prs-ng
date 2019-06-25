@@ -21,13 +21,13 @@ export class ProductEditComponent implements OnInit {
   vendors: Vendor[];
 
   constructor(private productSvc: ProductService,
-              private vendorSvc: VendorService,
-              private sysSvc: SystemService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private vendorSvc: VendorService,
+    private sysSvc: SystemService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     this.route.params.subscribe(params => this.productIdStr = params['id']);
@@ -52,19 +52,31 @@ export class ProductEditComponent implements OnInit {
       }
     )
   }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id' && member !== 'unit' && member !== 'photoPath') {
+        return true;
+      }
+    }
+    return false;
+  }
 
   edit() {
-    this.productSvc.update(this.product).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/product/list']);
-          alert('Product updated succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to update product');
+    if (this.hasNull(this.product)) {
+      alert('All fields must be filled (except unit and photo path)');
+    } else {
+      this.productSvc.update(this.product).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/product/list']);
+            alert('Product updated succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to update product');
+          }
         }
-      }
-    )
+      )
+    }
   }
 }

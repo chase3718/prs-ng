@@ -63,7 +63,7 @@
             <td>{{product.name}}</td>
             <td>{{product.price | currency}}</td>
             <td>{{product.unit}}</td>
-            <td><img *ngIf='product.photoPath' src='../../../../assets{{product.photoPath}}' height=50></td>
+            <td><img *ngIf='product.photoPath' src='{{product.photoPath}}' height=50></td>
             <td class="actions">
               <a routerLink='/product/detail/{{product.id}}'><img width=20 height=20
                   src="../../../../assets/details.png"></a>

@@ -19,12 +19,12 @@ export class UserEditComponent implements OnInit {
   authenticatedUser: User;
 
   constructor(private userSvc: UserService,
-              private sysSvc: SystemService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private sysSvc: SystemService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     this.authenticatedUser = this.sysSvc.data.user.instance;
@@ -41,18 +41,31 @@ export class UserEditComponent implements OnInit {
     );
   }
 
-  edit() {
-    this.userSvc.update(this.user).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/user/list']);
-          alert('User updated succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to update user');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  edit() {
+    if (this.hasNull(this.user)) {
+      alert('All fields must be filled');
+    } else {
+      this.userSvc.update(this.user).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/user/list']);
+            alert('User updated succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to update user');
+          }
+        }
+      )
+    }
   }
 }

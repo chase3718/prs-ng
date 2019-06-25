@@ -54,6 +54,12 @@
         aria-describedby="emailHelp" placeholder="Email" maxlength="100">
       <small id="emailHelp" class="form-text text-muted col-sm-2">vendor's Email</small>
     </div>
+    <div class="form-group row">
+      <label class='col-form-label col-sm-2' for="preApproved">Pre Approved:</label>
+      <input [(ngModel)]='vendor.preApproved' name='PreApproved' type="checkbox" class="form-control col-sm-6"
+        id="preApproved" aria-describedby="apprHelp">
+      <small id="apprHelp" class="form-text text-muted col-sm-2">Pre Approved</small>
+    </div>
     <div class='form-group'>
       <button (click)='edit()' class='btn btn-primary'>Update</button>
     </div>

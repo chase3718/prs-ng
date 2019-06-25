@@ -59,7 +59,7 @@ export class ProductCreateComponent implements OnInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
-          
+
         }
       })
 
@@ -79,21 +79,34 @@ export class ProductCreateComponent implements OnInit {
     }
   }
 
-  create() {
-    // this.product.photoPath = '/images/' + this.product.photoPath;
-    console.log(this.product, JSON.stringify(this.product.vendor));
-    this.productSvc.create(this.product).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/product/list']);
-          alert('Product created succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to create product');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id' && member !== 'unit' && member !== 'photoPath') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  create() {
+    if (this.hasNull(this.product)) {
+      alert('All fields must be filled (except unit and photo path)');
+    } else {
+
+      console.log(this.product, JSON.stringify(this.product.vendor));
+      this.productSvc.create(this.product).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/product/list']);
+            alert('Product created succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to create product');
+          }
+        }
+      )
+    }
   }
 
 }

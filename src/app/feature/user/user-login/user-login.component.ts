@@ -20,6 +20,13 @@ export class UserLoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('username')) {
+      this.user.userName = localStorage.getItem('username');
+      if (localStorage.getItem('password')) {
+        this.user.password = localStorage.getItem('password');
+        this.login();
+      }
+    }
   }
 
   login() {
@@ -30,6 +37,13 @@ export class UserLoginComponent implements OnInit {
           this.user = this.jr.data as User;
           this.sysSvc.data.user.instance = this.user;
           this.sysSvc.data.user.loggedIn = true;
+          this.userSvc.get(this.user.id.toString()).subscribe(
+            resp => {
+              let u = resp.data as User;
+              localStorage.setItem('username', u.userName);
+              localStorage.setItem('password', u.password);
+            }
+          );
           this.router.navigate(['home']);
         } else {
           this.message = JSON.stringify(this.jr.errors);

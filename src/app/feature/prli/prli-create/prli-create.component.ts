@@ -71,21 +71,34 @@ export class PrliCreateComponent implements OnInit {
     return this.products.find(product => product.name === selectedName);
   }
 
-  create() {
-    this.prli.purchaseRequest = this.pr;
-    this.prli.product = this.selectedProduct;
-    console.log(this.product);
-    this.prliSvc.create(this.prli).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/pr/lines/' + this.pr.id]);
-          alert('Line item created succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to create line item');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  create() {
+    if (this.hasNull(this.prli)) {
+      alert('All fields must be filled');
+    } else {
+      this.prli.purchaseRequest = this.pr;
+      this.prli.product = this.selectedProduct;
+      console.log(this.product);
+      this.prliSvc.create(this.prli).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/pr/lines/' + this.pr.id]);
+            alert('Line item created succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to create line item');
+          }
+        }
+      )
+    }
   }
 }

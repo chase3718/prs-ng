@@ -35,6 +35,8 @@ export class MenuComponent implements OnInit {
 
   logout() {
     this.sysSvc.data.user.loggedIn = false;
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
     this.router.navigate(['user/login']);
   }
 

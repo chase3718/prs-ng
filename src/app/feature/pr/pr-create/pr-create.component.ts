@@ -23,7 +23,7 @@ export class PrCreateComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     if (this.sysSvc.data.user.loggedIn) {
@@ -33,18 +33,31 @@ export class PrCreateComponent implements OnInit {
     }
   }
 
-  create() {
-    this.prSvc.submitNew(this.pr).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/pr/list']);
-          alert('Purchase request created succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to create purchase request');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  create() {
+    if (this.hasNull(this.pr)) {
+      alert('All fields must be filled');
+    } else {
+      this.prSvc.submitNew(this.pr).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/pr/list']);
+            alert('Purchase request created succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to create purchase request');
+          }
+        }
+      )
+    }
   }
 }

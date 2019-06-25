@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-    margin: 0;
+    margin-top: 30px;
     padding: 0;
     height: 100%;
     background-color: white;
@@ -10,6 +10,16 @@ html, body {
 
 span {
     font-size: 15pt;
+}
+
+footer {
+    width: 100%;
+    /* Height of the footer */
+    background: transparent;
+}
+
+small {
+    display: none;
 }
 
 table {
@@ -33,7 +43,7 @@ thead th {
 .input-icon>i {
     position: absolute;
     display: block;
-    transform: translate(0, -50%);
+    transform: translate(-15px, -50%);
     top: 50%;
     pointer-events: none;
     width: 25px;
@@ -121,18 +131,29 @@ nav {
 .sidenav {
     overflow: hidden;
     border: 2px transparent solid;
+    display: inline;
+    position: fixed;
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100vw;
+    /* Full width */
+    z-index: 1000;
 }
 
 .sidenav a {
     float: left;
-    text-align: center;
-    padding: 14px;
     text-decoration: none;
     border: 1px transparent solid;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 .sidenav ul {
-    display: block;
+    display: inline;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -160,8 +181,8 @@ a {
     text-decoration: none;
 }
 
-footer {
-    width: 100%;
-    /* Height of the footer */
-    background: transparent;
+@media screen and (max-width: 578px) {
+    body {
+        margin-top: 80px;
+    }
 }

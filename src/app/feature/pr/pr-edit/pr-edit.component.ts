@@ -18,12 +18,12 @@ export class PrEditComponent implements OnInit {
   title: string = 'Purchase Request Edit';
 
   constructor(private prSvc: PurchaseRequestService,
-              private sysSvc: SystemService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private sysSvc: SystemService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     this.route.params.subscribe(params => this.prIdStr = params['id']);
@@ -39,18 +39,31 @@ export class PrEditComponent implements OnInit {
     );
   }
 
-  edit() {
-    this.prSvc.update(this.pr).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/pr/list']);
-          alert('PurchaseRequest Updated succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to update pr');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  edit() {
+    if (this.hasNull(this.pr)) {
+      alert('All fields must be filled');
+    } else {
+      this.prSvc.update(this.pr).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/pr/list']);
+            alert('PurchaseRequest Updated succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to update pr');
+          }
+        }
+      )
+    }
   }
 }

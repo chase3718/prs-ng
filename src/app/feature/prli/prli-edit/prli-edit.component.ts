@@ -24,13 +24,13 @@ export class PrliEditComponent implements OnInit {
   prliid: string;
 
   constructor(private prliSvc: PurchaseRequestLineItemService,
-              private sysSvc: SystemService,
-              private productSvc: ProductService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private sysSvc: SystemService,
+    private productSvc: ProductService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (!this.sysSvc.data.user.loggedIn){
+    if (!this.sysSvc.data.user.loggedIn) {
       this.router.navigate(['user/login']);
     }
     this.route.params.subscribe(params => this.prliid = params['id']);
@@ -56,19 +56,32 @@ export class PrliEditComponent implements OnInit {
     );
   }
 
-  create() {
-    this.pr = this.prli.purchaseRequest;
-    this.prliSvc.update(this.prli).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
-          alert('Line item updated succesfuly');
-        } else {
-          console.log(this.jr.errors);
-          alert('Failed to update line item');
-        }
+  hasNull(target) {
+    for (let member in target) {
+      if (target[member] == null && member !== 'id') {
+        return true;
       }
-    )
+    }
+    return false;
+  }
+
+  create() {
+    if (this.hasNull(this.prli)) {
+      alert('All fields must be filled');
+    } else {
+      this.pr = this.prli.purchaseRequest;
+      this.prliSvc.update(this.prli).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
+            alert('Line item updated succesfuly');
+          } else {
+            console.log(this.jr.errors);
+            alert('Failed to update line item');
+          }
+        }
+      )
+    }
   }
 }

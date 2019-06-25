@@ -33,7 +33,7 @@
       <td>{{ product.unit }}</td>
     </tr>
     <tr class="col-12">
-      <td><img width=100% src="{{product.photoPath}}"></td>
+      <td><img style="max-width: 100%" src="{{product.photoPath}}"></td>
     </tr>
     <tr *ngIf="authenticatedUser.admin">
       <td colspan="2">
