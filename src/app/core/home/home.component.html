@@ -29,7 +29,7 @@
                 <td>{{pr.justification}}</td>
                 <td>{{pr.dateNeeded}}</td>
                 <td>{{pr.deliveryMode}}</td>
-                <td>{{pr.status}}</td>
+                <td [ngClass]="pr.status">{{pr.status}}</td>
                 <td>${{pr.total}}</td>
                 <td>{{pr.submittedDate}}</td>
                 <td class="actions" colspan="1">

@@ -119,7 +119,7 @@ td {
     text-align: left;
     vertical-align: middle;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 15pt;
 }
 
 ::-webkit-scrollbar {
@@ -133,6 +133,11 @@ td {
 nav {
     overflow: hidden;
     background-color: #333;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .sidenav {
@@ -186,6 +191,22 @@ a:hover .disabled {
 
 a {
     text-decoration: none;
+}
+
+.Rejected {
+    background: #ff9595;
+}
+
+.Approved {
+    background: #95ff95;
+}
+
+.Review {
+    background: #ffff95;
+}
+
+.New {
+
 }
 
 @media screen and (max-width: 578px) {

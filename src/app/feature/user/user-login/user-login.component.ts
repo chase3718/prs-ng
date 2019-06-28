@@ -16,8 +16,8 @@ export class UserLoginComponent implements OnInit {
   jr: JsonResponse;
 
   constructor(private userSvc: UserService,
-              private sysSvc: SystemService,
-              private router: Router) { }
+    private sysSvc: SystemService,
+    private router: Router) { }
 
   ngOnInit() {
     if (localStorage.getItem('username')) {
@@ -30,25 +30,32 @@ export class UserLoginComponent implements OnInit {
   }
 
   login() {
-    this.userSvc.login(this.user).subscribe(
-      jresp => {
-        this.jr = jresp;
-        if (this.jr.errors == null) {
-          this.user = this.jr.data as User;
-          this.sysSvc.data.user.instance = this.user;
-          this.sysSvc.data.user.loggedIn = true;
-          this.userSvc.get(this.user.id.toString()).subscribe(
-            resp => {
-              let u = resp.data as User;
-              localStorage.setItem('username', u.userName);
-              localStorage.setItem('password', u.password);
-            }
-          );
-          this.router.navigate(['home']);
-        } else {
-          this.message = JSON.stringify(this.jr.errors);
+    if (this.user.userName !== null && this.user.password !== null) {
+      this.userSvc.login(this.user).subscribe(
+        jresp => {
+          this.jr = jresp;
+          if (this.jr.errors == null) {
+            this.user = this.jr.data as User;
+            this.sysSvc.data.user.instance = this.user;
+            this.sysSvc.data.user.loggedIn = true;
+            this.userSvc.get(this.user.id.toString()).subscribe(
+              resp => {
+                let u = resp.data as User;
+                localStorage.setItem('username', u.userName);
+                localStorage.setItem('password', u.password);
+              }
+            );
+            this.router.navigate(['home']);
+          } else {
+            this.message = JSON.stringify(this.jr.errors);
+          }
         }
-      }
-    )
+      )
+    } else if (this.user.userName == null) {
+      this.message = 'Username cannot be empty';
+    } else if (this.user.password == null) {
+      this.message = 'Password cannot be empty';
+    }
   }
+
 }

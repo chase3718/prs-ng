@@ -3,8 +3,8 @@
   <div class="lefthalf">
     <span class="component-title">{{title}}&nbsp;</span>
     <span class="create-new">
-      <a *ngIf="authenticatedUser.admin" routerLink="/pr/create/"><img id='createnew' width='20' height='20'
-          src='../../../../assets/add-icon.png' title='Add New'></a>
+      <a routerLink="/pr/create/"><img id='createnew' width='20' height='20' src='../../../../assets/add-icon.png'
+          title='Add New'></a>
     </span>
   </div>
 </div>
@@ -34,7 +34,7 @@
           <td>{{pr.justification}}</td>
           <td>{{pr.dateNeeded}}</td>
           <td>{{pr.deliveryMode}}</td>
-          <td>{{pr.status}}</td>
+          <td [ngClass]="pr.status">{{pr.status}}</td>
           <td>{{pr.total | currency}}</td>
           <td>{{pr.submittedDate}}</td>
           <td class="actions" colspan="1">

@@ -15,6 +15,9 @@ export class UserCreateComponent implements OnInit {
   title: string = 'User Create';
   jr: JsonResponse;
   user: User = new User();
+  phoneNumber1: number;
+  phoneNumber2: number;
+  phoneNumber3: number;
 
   constructor(private userSvc: UserService,
               private sysSvc: SystemService,
@@ -36,6 +39,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   create() {
+    this.user.phoneNumber = this.phoneNumber1 + '-' + this.phoneNumber2 + '-' + this.phoneNumber3;
     if (this.hasNull(this.user)) {
       alert('All fields must be filled');
       console.log(this.user);

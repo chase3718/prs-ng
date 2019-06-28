@@ -17,6 +17,9 @@ export class UserEditComponent implements OnInit {
   user: User;
   title: string = 'User Edit';
   authenticatedUser: User;
+  phoneNumber1: number;
+  phoneNumber2: number;
+  phoneNumber3: number;
 
   constructor(private userSvc: UserService,
     private sysSvc: SystemService,
@@ -34,6 +37,9 @@ export class UserEditComponent implements OnInit {
         this.jr = jresp;
         if (this.jr.errors == null) {
           this.user = this.jr.data as User;
+          this.phoneNumber1 = (Number)(this.user.phoneNumber.substring(0, 3));
+          this.phoneNumber2 = (Number)(this.user.phoneNumber.substring(4, 7));
+          this.phoneNumber3 = (Number)(this.user.phoneNumber.substring(8));
         } else {
           console.log(this.jr.errors);
         }
@@ -51,6 +57,7 @@ export class UserEditComponent implements OnInit {
   }
 
   edit() {
+    this.user.phoneNumber = this.phoneNumber1 + '-' + this.phoneNumber2 + '-' + this.phoneNumber3;
     if (this.hasNull(this.user)) {
       alert('All fields must be filled');
     } else {

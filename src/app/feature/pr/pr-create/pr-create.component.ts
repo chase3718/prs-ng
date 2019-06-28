@@ -43,21 +43,19 @@ export class PrCreateComponent implements OnInit {
   }
 
   create() {
-    if (this.hasNull(this.pr)) {
-      alert('All fields must be filled');
-    } else {
-      this.prSvc.submitNew(this.pr).subscribe(
-        jresp => {
-          this.jr = jresp;
-          if (this.jr.errors == null) {
-            this.router.navigate(['/pr/list']);
-            alert('Purchase request created succesfuly');
-          } else {
-            console.log(this.jr.errors);
-            alert('Failed to create purchase request');
-          }
+
+    this.prSvc.submitNew(this.pr).subscribe(
+      jresp => {
+        this.jr = jresp;
+        if (this.jr.errors == null) {
+          this.router.navigate(['/pr/list']);
+          alert('Purchase request created succesfuly');
+        } else {
+          console.log(this.jr.errors);
+          alert('Failed to create purchase request');
         }
-      )
-    }
+      }
+    )
+
   }
 }

@@ -66,22 +66,20 @@ export class PrliEditComponent implements OnInit {
   }
 
   create() {
-    if (this.hasNull(this.prli)) {
-      alert('All fields must be filled');
-    } else {
-      this.pr = this.prli.purchaseRequest;
-      this.prliSvc.update(this.prli).subscribe(
-        jresp => {
-          this.jr = jresp;
-          if (this.jr.errors == null) {
-            this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
-            alert('Line item updated succesfuly');
-          } else {
-            console.log(this.jr.errors);
-            alert('Failed to update line item');
-          }
+
+    this.pr = this.prli.purchaseRequest;
+    this.prliSvc.update(this.prli).subscribe(
+      jresp => {
+        this.jr = jresp;
+        if (this.jr.errors == null) {
+          this.router.navigate(['/pr/pr-lines/' + this.pr.id]);
+          alert('Line item updated succesfuly');
+        } else {
+          console.log(this.jr.errors);
+          alert('Failed to update line item');
         }
-      )
-    }
+      }
+    )
+
   }
 }
