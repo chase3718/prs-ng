@@ -8,24 +8,38 @@
   <table class="table table-sm" *ngIf='pr'>
     <tr>
       <td>Id</td>
-      <td>User</td>
-      <td>Description</td>
-      <td>Justification</td>
-      <td>Date needed</td>
-      <td>Delivery mode</td>
-      <td>Status</td>
-      <td>Total</td>
-      <td>Submitted date</td>
+      <td>{{ pr.id}}</td>
     </tr>
     <tr>
-      <td>{{ pr.id}}</td>
+      <td>User</td>
       <td>{{ pr.user.userName }}</td>
+    </tr>
+    <tr>
+      <td>Description</td>
       <td>{{ pr.description }}</td>
+    </tr>
+    <tr>
+      <td>Justification</td>
       <td>{{ pr.justification }}</td>
+    </tr>
+    <tr>
+      <td>Date needed</td>
       <td>{{ pr.dateNeeded }}</td>
+    </tr>
+    <tr>
+      <td>Delivery mode</td>
       <td>{{ pr.deliveryMode }}</td>
+    </tr>
+    <tr>
+      <td>Status</td>
       <td>{{ pr.status }}</td>
+    </tr>
+    <tr>
+      <td>Total</td>
       <td>${{ pr.total }}</td>
+    </tr>
+    <tr>
+      <td>Submitted date</td>
       <td>{{pr.submittedDate}}</td>
     </tr>
     <tr>

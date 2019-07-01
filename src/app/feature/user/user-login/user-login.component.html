@@ -6,12 +6,12 @@
         <td colspan="2">Login</td>
       </tr>
       <tr>
-        <td>Username:</td>
-        <td><input [(ngModel)]='user.userName' name='UserName' type='text'></td>
+        <td class="col-2">Username:</td>
+        <td class="col-2"><input [(ngModel)]='user.userName' name='UserName' type='text'></td>
       </tr>
       <tr>
-        <td>Password:</td>
-        <td><input [(ngModel)]='user.password' name='Password' type='password'></td>
+        <td class="col-2">Password:</td>
+        <td class="col-2"><input [(ngModel)]='user.password' name='Password' type='password'></td>
       </tr>
       <tr>
         <td class='text-center' colspan="2"><button type='submit' (click)="login()"
