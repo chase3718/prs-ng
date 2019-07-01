@@ -49,6 +49,10 @@ export class PurchaseRequestService {
     return this.http.get(this.url + 'user/' + id) as Observable<JsonResponse>;
   }
 
+  getLineItems(id: string): Observable<JsonResponse> {
+    return this.http.get('http://localhost:8080/purchase-request-line-items/from-purchase-request/' + id) as Observable<JsonResponse>;
+  }
+
   update(purchaseRequest: PurchaseRequest): Observable<JsonResponse> {
     return this.http.put(this.url, purchaseRequest) as Observable<JsonResponse>;
   }

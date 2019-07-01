@@ -43,6 +43,38 @@
       <td>{{pr.submittedDate}}</td>
     </tr>
     <tr>
+      <p *ngIf="!lineItems">Loading ...</p>
+
+      <div *ngIf="lineItems">
+        <div *ngIf="lineItems.length > 0">
+          <div class="tbl-header" style="overflow: auto">
+            <table class="table-dark table-sm" cellpadding="0" cellspacing="0" border="0">
+              <thead>
+                <th><a class="btn font-weight-bold">PRODUCT</a></th>
+                <th><a class="btn font-weight-bold">PRICE</a></th>
+                <th><a class="btn font-weight-bold">QUANTITY</a></th>
+                <th><a class="btn font-weight-bold">TOTAL</a></th>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table class="table-active table-bordered table-sm" cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+                <tr *ngFor='let lineItem of lineItems'>
+                  <td>{{lineItem.product.name}}</td>
+                  <td>{{lineItem.product.price | currency}}</td>
+                  <td>{{lineItem.quantity}}</td>
+                  <td>{{lineItem.quantity * lineItem.product.price | currency}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        
+      </div>
+    </tr>
+    <tr>
       <td colspan="2">
         <button (click)="approve()" class='btn btn-primary' title='Approve'>Approve</button>&nbsp;
         <button (click)="reject()" class='btn btn-danger' title='Reject'>Reject</button>

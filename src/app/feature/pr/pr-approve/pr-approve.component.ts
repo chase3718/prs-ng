@@ -4,6 +4,8 @@ import { PurchaseRequest } from 'src/app/model/purchase-request.class';
 import { PurchaseRequestService } from 'src/app/service/purchase-request.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SystemService } from 'src/app/service/system.service';
+import { Product } from 'src/app/model/product.class';
+import { PurchaseRequestLineItem } from 'src/app/model/purchase-request-line-item.class';
 
 @Component({
   selector: 'app-pr-approve',
@@ -16,6 +18,7 @@ export class PrApproveComponent implements OnInit {
   prIdStr: string;
   pr: PurchaseRequest;
   title: string = 'Purchase Request Approval';
+  lineItems: PurchaseRequestLineItem[];
   rejected = false;
 
   constructor(private prSvc: PurchaseRequestService,
@@ -35,6 +38,16 @@ export class PrApproveComponent implements OnInit {
           this.pr = this.jr.data as PurchaseRequest;
         } else {
           alert('Unable to approve the purchase request at this time');
+          console.log(this.jr.errors);
+        }
+      }
+    );
+    this.prSvc.getLineItems(this.prIdStr).subscribe(
+      jresp => {
+        this.jr = jresp;
+        if (this.jr.errors == null) {
+          this.lineItems = this.jr.data as PurchaseRequestLineItem[];
+        } else {
           console.log(this.jr.errors);
         }
       }
